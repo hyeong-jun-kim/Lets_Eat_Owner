@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".login.Login">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
         app:layout_constraintVertical_bias="0.217" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,13 +112,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.103" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_button"
         android:layout_width="338dp"
         android:layout_height="49dp"
         android:background="@drawable/circle_roundedgray"
         android:text="로그인"
         android:textSize="20sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/kakao_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
@@ -144,12 +145,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.911" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sub_login_button"
         android:layout_width="336dp"
         android:layout_height="61dp"
         android:text="임시 로그인(서버없을시)"
         android:textSize="20sp"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
