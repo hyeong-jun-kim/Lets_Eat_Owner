@@ -56,9 +56,6 @@
         <activity android:name=".restaurant.list.RestListMain" />
         <activity android:name=".photo.PhotoList" />
         <activity
-            android:name=".ReviewActivity"
-            android:exported="true" />
-        <activity
             android:name=".order.OrderActivity"
             android:exported="true" />
         <activity
