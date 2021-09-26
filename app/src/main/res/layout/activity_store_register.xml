@@ -30,7 +30,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -273,45 +274,43 @@
                         android:textSize="13dp"
                         tools:ignore="TouchTargetSizeCheck" />
                 </RadioGroup>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
-                    android:text="식당 카테고리
-"
+                    android:text="식당 카테고리"
                     android:textColor="#000000"
                     android:textSize="15dp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textSize="13dp" />
-
                     <Spinner
                         android:id="@+id/spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="등록"
-                    android:textSize="15sp" />
-
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/notosansbold"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/round_circle3"
+        android:textSize="15sp"
+        android:text="등록"
+        />
 </LinearLayout>

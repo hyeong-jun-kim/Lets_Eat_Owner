@@ -1,10 +1,14 @@
 package org.techtown.letseat;
 
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.badge.BadgeDrawable;
@@ -51,7 +55,27 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_baseline_fastfood_24);
         tabLayout.getTabAt(2).setIcon(R.drawable.waiting);
 
+        tabLayout.getTabAt(0).getIcon().setColorFilter(Color.parseColor("#ED6868"),PorterDuff.Mode.SRC_IN);
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager){
+
+            @Override
+            public void onTabSelected(@NonNull TabLayout.Tab tab) {
+                super.onTabSelected(tab);
+                tab.getIcon().setColorFilter(Color.parseColor("#ED6868"), PorterDuff.Mode.SRC_IN);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                super.onTabUnselected(tab);
+                tab.getIcon().setColorFilter(Color.parseColor("#89000000"), PorterDuff.Mode.SRC_IN);
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                super.onTabReselected(tab);
+            }
+        });
     }
-
-
 }

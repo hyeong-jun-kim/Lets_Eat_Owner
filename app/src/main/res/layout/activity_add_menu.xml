@@ -166,10 +166,14 @@
                 </LinearLayout>
 
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosansbold"
+                    android:layout_gravity="center"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/round_circle3"
                     android:text="추가하기"
                     android:textSize="15sp" />
 
