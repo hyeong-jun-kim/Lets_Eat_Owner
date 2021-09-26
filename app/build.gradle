@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "org.techtown.letseat"
+        applicationId "org.techtown.letseat_owner"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

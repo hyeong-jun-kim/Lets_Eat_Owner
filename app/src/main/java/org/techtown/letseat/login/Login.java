@@ -48,7 +48,7 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button;
+    private Button  btn_register, login_button, sub_login_button;
     private LoginButton kakao_login_button;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
@@ -59,6 +59,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+
 
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
@@ -99,6 +100,15 @@ public class Login extends AppCompatActivity {
         });
 
         HashKey();
+
+        sub_login_button = findViewById(R.id.sub_login_button);
+        sub_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // 로그인 POST 요청

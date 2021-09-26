@@ -17,19 +17,24 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
             android:id="@+id/toolbar"/>
+
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:id="@+id/tab_layout">
+            tools:ignore="SpeakableTextPresentCheck">
 
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/view_pager"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
