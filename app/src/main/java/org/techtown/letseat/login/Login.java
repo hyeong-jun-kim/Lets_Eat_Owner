@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -50,6 +52,7 @@ import java.security.MessageDigest;
 public class Login extends AppCompatActivity {
     private Button  btn_register, login_button, sub_login_button;
     private LoginButton kakao_login_button;
+    private ImageView fakeKakao;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
 
@@ -60,7 +63,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-
+        fakeKakao = findViewById(R.id.fake_kakao);
         login_button = findViewById(R.id.login_button);
         input_email = findViewById(R.id.input_email);
         input_password = findViewById(R.id.input_password);
@@ -96,10 +99,18 @@ public class Login extends AppCompatActivity {
         kakao_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
             }
         });
 
         HashKey();
+
+        fakeKakao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kakao_login_button.performClick();
+            }
+        });
 
         sub_login_button = findViewById(R.id.sub_login_button);
         sub_login_button.setOnClickListener(new View.OnClickListener() {
