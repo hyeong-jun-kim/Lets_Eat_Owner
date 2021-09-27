@@ -1,11 +1,11 @@
 package org.techtown.letseat.waiting;
 
 public class Waiting {
-    private String waiting_number;
-    private String name;
-    private String phonenum;
-    private String person_number;
-    private String reception_time;
+    String waiting_number;
+    String name;
+    String phonenum;
+    String person_number;
+    String reception_time;
 
 
     public Waiting(String waiting_number, String name, String phonenum, String person_number,

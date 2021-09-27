@@ -1,5 +1,6 @@
 package org.techtown.letseat.waiting;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,28 +16,43 @@ import org.techtown.letseat.menu.Menu;
 import org.techtown.letseat.waiting.Waiting;
 import org.techtown.letseat.waiting.WaitingAdapter;
 
+import java.util.ArrayList;
+
 
 public class waitingFrag extends Fragment {
 
+    private ArrayList<Waiting> items = new ArrayList<>();
+
+    public waitingFrag() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_waiting,container,false);
+        View view = inflater.inflate(R.layout.fragment_waiting,container,false);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.waiting_recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        initDataset();
+
+        Context context = view.getContext();
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.waiting_recyclerview);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        WaitingAdapter adapter = new WaitingAdapter();
 
-        adapter.addItem(new Waiting("1", "안태현","010-2222-3333",
-                "4명","18시30분"));
-        adapter.addItem(new Waiting("2", "김형준","010-3333-4444",
-                "3명","18시45분"));
-
+        WaitingAdapter adapter = new WaitingAdapter(context,items);
         recyclerView.setAdapter(adapter);
 
-        return rootView;
+        return view;
+    }
+
+    private void initDataset(){
+        items.clear();
+        items.add(new Waiting("1","안태현","010-1212-1111",
+                "4명","17시30분"));
+        items.add(new Waiting("2","김형준","010-2323-5565",
+                "3명","18시00분"));
     }
 }

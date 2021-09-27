@@ -1,5 +1,6 @@
 package org.techtown.letseat.waiting;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +15,35 @@ import org.techtown.letseat.menu.MenuAdapter;
 
 import java.util.ArrayList;
 
-public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder>{
+public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.MyViewHolder>{
 
-    ArrayList<Waiting> items = new ArrayList<Waiting>();
+    private ArrayList<Waiting> items;
+    private LayoutInflater mInflate;
+    private Context mContext;
+
+    public WaitingAdapter(Context context, ArrayList<Waiting> items) {
+        this.mContext = context;
+        this.mInflate = LayoutInflater.from(context);
+        this.items = items;
+    }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View itemView = inflater.inflate(R.layout.waiting_recycle, viewGroup, false);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new ViewHolder(itemView);
+
+        View itemView = mInflate.inflate(R.layout.waiting_recycle, parent, false);
+        MyViewHolder viewHolder = new MyViewHolder(itemView);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Waiting item = items.get(position);
-        viewHolder.setItem(item);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.waiting_number.setText(items.get(position).waiting_number);
+        holder.name.setText(items.get(position).name);
+        holder.phonenum.setText(items.get(position).phonenum);
+        holder.person_number.setText(items.get(position).person_number);
+        holder.reception_time.setText(items.get(position).reception_time);
     }
 
     @Override
@@ -44,14 +57,14 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
 
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView waiting_number;
-        TextView name;
-        TextView phonenum;
-        TextView person_number;
-        TextView reception_time;
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+        public TextView waiting_number;
+        public TextView name;
+        public TextView phonenum;
+        public TextView person_number;
+        public TextView reception_time;
 
-        public ViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView){
             super(itemView);
             waiting_number = itemView.findViewById(R.id.waiting_number);
             name = itemView.findViewById(R.id.name);
