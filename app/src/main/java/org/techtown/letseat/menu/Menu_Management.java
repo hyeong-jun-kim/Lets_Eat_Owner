@@ -20,7 +20,8 @@ public class Menu_Management extends AppCompatActivity {
         setContentView(R.layout.activity_menu_management);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         MenuAdapter adapter = new MenuAdapter();
 

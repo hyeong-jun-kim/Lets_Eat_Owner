@@ -8,11 +8,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
+
+import org.techtown.letseat.waiting.waitingFrag;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private storeFrag storeFrag;
     private orderFrag orderFrag;
-    private waitingFrag waitingFrag;
+    private org.techtown.letseat.waiting.waitingFrag waitingFrag;
 
 
     @Override

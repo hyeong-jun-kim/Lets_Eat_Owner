@@ -45,17 +45,26 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
 
 
     static class ViewHolder extends RecyclerView.ViewHolder{
+        TextView waiting_number;
         TextView name;
         TextView phonenum;
+        TextView person_number;
+        TextView reception_time;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
+            waiting_number = itemView.findViewById(R.id.waiting_number);
             name = itemView.findViewById(R.id.name);
             phonenum = itemView.findViewById(R.id.phonenum);
+            person_number = itemView.findViewById(R.id.person_number);
+            reception_time = itemView.findViewById(R.id.reception_time);
         }
         public void setItem(Waiting item){
+            waiting_number.setText(item.getWaiting_number());
             name.setText(item.getName());
             phonenum.setText(item.getPhonenum());
+            person_number.setText(item.getPerson_number());
+            reception_time.setText(item.getReception_time());
         }
     }
 }
