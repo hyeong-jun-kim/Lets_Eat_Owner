@@ -113,7 +113,7 @@ public class Login extends AppCompatActivity {
 
     // 로그인 POST 요청
     void login(){
-            String url = "http://183.100.237.18:8000/letseat/login/normal";
+            String url = "http://125.132.62.150:8000/letseat/login/normal";
             JSONObject postData = new JSONObject();
             try {
                 postData.put("email", email_string);
@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
                         @Override // 응답 잘 받았을 때
                         public void onResponse(JSONObject response) {
                             // 자동 로그인 값 넣어주기
-                            SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences pref                                                                                                                                                                                                                                                                                          = getSharedPreferences("login", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("email", input_email.getText().toString());
                             editor.putString("pwd", input_password.getText().toString());
