@@ -37,6 +37,9 @@
         <activity
             android:name=".Naver_map"
             android:exported="true" />
+        <activity
+            android:name=".order.ItemActivity"
+            android:exported="true"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

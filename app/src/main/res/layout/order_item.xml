@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/order_item_text1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#FF6F61"
+        android:gravity="center"
+        android:text="주 문 내 역"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/order_item_text2"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_edge"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="주문일시"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/order_item_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="2021-09-28-22:23"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/order_item_text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="테이블 번호"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+        <TextView
+            android:id="@+id/order_item_text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="1번 테이블"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/order_item_text6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="주문메뉴"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+        <TextView
+            android:id="@+id/order_item_text7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="마라탕 1인분, 해물탕 1인분"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/order_item_text8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="요청사항"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+        <TextView
+            android:id="@+id/order_item_text9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="보통맛으로 해주세요"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/order_item_text10"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="금액"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+        <TextView
+            android:id="@+id/order_item_text11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="20,000원"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/order_item_text12"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="결제방식"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+
+        <TextView
+            android:id="@+id/order_item_text13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:text="카카오페이 결제완료"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:background="@drawable/textview_edge"/>
+    </LinearLayout>
+
+</LinearLayout>

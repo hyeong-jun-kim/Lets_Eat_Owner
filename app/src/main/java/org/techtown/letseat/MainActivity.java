@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.techtown.letseat.order.orderFrag;
 import org.techtown.letseat.waiting.waitingFrag;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private storeFrag storeFrag;
-    private orderFrag orderFrag;
+    private org.techtown.letseat.order.orderFrag orderFrag;
     private org.techtown.letseat.waiting.waitingFrag waitingFrag;
 
 
