@@ -3,9 +3,11 @@ package org.techtown.letseat.order;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.techtown.letseat.R;
@@ -14,10 +16,12 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     private ArrayList<Orderdata> Dataset;
+    private Intent intent;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView ordertime, ordertimetext ,tablenumber, tablenumbertext, menu, menulist, quantity, quantitytext, quantitymore, moremenu, moremenutext, request, requesttext, price, pricetext;
-        public View view1, view2;
+        public View view1;
+        public Button check_order, check_serving;
 
         public ViewHolder(View view){
             super(view);
@@ -37,7 +41,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
             price = (TextView) view.findViewById(R.id.price);
             pricetext = (TextView) view.findViewById(R.id.pricetext);
             view1 = (View) view.findViewById(R.id.view1);
-            view2 = (View) view.findViewById(R.id.view2);
+            check_order = view.findViewById(R.id.check_order);;
+            check_serving = view.findViewById(R.id.check_serving);
         }
     }
 
@@ -54,7 +59,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position){
-
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                intent = new Intent(view.getContext(), ItemActivity.class);
+                intent.putExtra("number", position);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
