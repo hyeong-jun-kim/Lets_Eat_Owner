@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.login.Login;
@@ -117,10 +118,12 @@ public class Store_Register extends AppCompatActivity {
     // 식당 생성 POST 요청
     void registerStore() {
         String url = "http://125.132.62.150:8000/letseat/store/register";
-        JSONObject resData = new JSONObject();
         JSONObject postData = new JSONObject();
+        JSONObject ownerData = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
         try {
-            resData.put("resId","1");
+            ownerData.put("ownerId", 1);
+            //jsonArray.put(ownerData);
             postData.put("resName", resName);
             postData.put("phoneNumber", phoneNumber);
             postData.put("openTime", openTime);
@@ -129,6 +132,7 @@ public class Store_Register extends AppCompatActivity {
             postData.put("restype", resType);
             postData.put("location", location);
             postData.put("aloneAble", aloneAble);
+            postData.put("owner", ownerData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
