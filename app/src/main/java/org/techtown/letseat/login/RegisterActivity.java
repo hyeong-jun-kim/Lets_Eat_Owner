@@ -23,11 +23,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
-import org.techtown.letseat.DatePickerFragment;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 
 public class RegisterActivity extends AppCompatActivity {

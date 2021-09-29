@@ -16,7 +16,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
-        android:name=".KakaoSDKInit"
+        android:name=".login.KakaoSDKInit"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,16 +26,13 @@
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Add_Menu"
+            android:name=".menu.Menu_add"
             android:exported="true" />
         <activity
-            android:name=".menu.Menu_Management"
+            android:name=".menu.Menu_management"
             android:exported="true" />
         <activity
-            android:name=".Store_Register"
-            android:exported="true" />
-        <activity
-            android:name=".Naver_map"
+            android:name=".restaurant.RestaurantRegister"
             android:exported="true" />
         <activity
             android:name=".order.ItemActivity"
@@ -49,8 +46,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".pay_test.PayActivity" />
-        <activity android:name=".pay_test.Kakao_pay_test" />
+        <activity android:name=".kakao_pay.KaKaoPay" />
+        <activity android:name=".kakao_pay.KakaoPayTest" />
         <activity android:name=".menu.menu_sample" />
         <activity android:name=".login.RegisterActivity" />
         <activity

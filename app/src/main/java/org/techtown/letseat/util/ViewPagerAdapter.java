@@ -1,4 +1,4 @@
-package org.techtown.letseat;
+package org.techtown.letseat.util;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

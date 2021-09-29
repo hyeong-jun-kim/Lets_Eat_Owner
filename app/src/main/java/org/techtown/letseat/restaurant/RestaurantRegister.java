@@ -1,9 +1,8 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +25,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.login.Login;
+import org.techtown.letseat.util.AppHelper;
+import org.techtown.letseat.MainActivity;
+import org.techtown.letseat.R;
 
-public class Store_Register extends AppCompatActivity {
+public class RestaurantRegister extends AppCompatActivity {
 
     private int aloneAble;
     private String resName, resType, phoneNumber, openTime, intro, businessNumber, location;

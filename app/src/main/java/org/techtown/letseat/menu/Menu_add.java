@@ -1,32 +1,22 @@
-package org.techtown.letseat;
+package org.techtown.letseat.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.techtown.letseat.login.Login;
+import org.techtown.letseat.R;
 
 import java.io.ByteArrayOutputStream;
 
-public class Add_Menu extends AppCompatActivity {
+public class Menu_add extends AppCompatActivity {
 
     private final int GET_GALLERY_IMAGE = 200;
     private EditText menuNameEdit, menuPriceEdit, menuDescriptionEdit;
@@ -35,7 +25,7 @@ public class Add_Menu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_menu);
+        setContentView(R.layout.menu_add);
 
         menuImage = (ImageView) findViewById(R.id.menu_image);
         menuImage.setOnClickListener(new View.OnClickListener() {

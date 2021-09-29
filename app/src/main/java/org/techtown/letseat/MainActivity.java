@@ -13,7 +13,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.order.orderFrag;
-import org.techtown.letseat.waiting.waitingFrag;
+import org.techtown.letseat.restaurant.RestaurantFragment;
+import org.techtown.letseat.util.ViewPagerAdapter;
+import org.techtown.letseat.waiting.WaitingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
 
-    private storeFrag storeFrag;
+    private RestaurantFragment RestaurantFragment;
     private org.techtown.letseat.order.orderFrag orderFrag;
-    private org.techtown.letseat.waiting.waitingFrag waitingFrag;
+    private WaitingFragment WaitingFragment;
 
 
     @Override
@@ -41,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        storeFrag = new storeFrag();
+        RestaurantFragment = new RestaurantFragment();
         orderFrag = new orderFrag();
-        waitingFrag = new waitingFrag();
+        WaitingFragment = new WaitingFragment();
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
-        viewPagerAdapter.addFragment(storeFrag,"가게 관리");
+        viewPagerAdapter.addFragment(RestaurantFragment,"가게 관리");
         viewPagerAdapter.addFragment(orderFrag,"주문 관리");
-        viewPagerAdapter.addFragment(waitingFrag,"대기자 관리");
+        viewPagerAdapter.addFragment(WaitingFragment,"대기자 관리");
 
         viewPager.setAdapter(viewPagerAdapter);
 

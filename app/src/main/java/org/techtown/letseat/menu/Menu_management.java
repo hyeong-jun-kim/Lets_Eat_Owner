@@ -9,10 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import org.techtown.letseat.Add_Menu;
 import org.techtown.letseat.R;
 
-public class Menu_Management extends AppCompatActivity {
+public class Menu_management extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +34,7 @@ public class Menu_Management extends AppCompatActivity {
         add_menu_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Add_Menu.class);
+                Intent intent = new Intent(getApplicationContext(), Menu_add.class);
                 startActivity(intent);
             }
         });

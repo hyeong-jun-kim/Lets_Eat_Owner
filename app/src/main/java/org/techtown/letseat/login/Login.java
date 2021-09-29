@@ -7,10 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
@@ -30,20 +27,10 @@ import com.kakao.usermgmt.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
-import org.techtown.letseat.KaKaoCallBack;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.MessageDigest;
 
 

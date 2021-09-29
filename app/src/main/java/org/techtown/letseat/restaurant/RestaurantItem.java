@@ -1,10 +1,10 @@
-package org.techtown.letseat;
+package org.techtown.letseat.restaurant;
 
-public class storeItem {
+public class RestaurantItem {
 
     private String title;
     private int src;
-    public storeItem(int src, String title) {
+    public RestaurantItem(int src, String title) {
 
         this.src = src;
         this.title = title;

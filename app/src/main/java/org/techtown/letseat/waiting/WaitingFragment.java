@@ -12,25 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.menu.Menu;
-import org.techtown.letseat.waiting.Waiting;
-import org.techtown.letseat.waiting.WaitingAdapter;
 
 import java.util.ArrayList;
 
 
-public class waitingFrag extends Fragment {
+public class WaitingFragment extends Fragment {
 
     private ArrayList<Waiting> items = new ArrayList<>();
 
-    public waitingFrag() {
+    public WaitingFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_waiting,container,false);
+        View view = inflater.inflate(R.layout.waiting_fragment,container,false);
 
         initDataset();
 
