@@ -33,6 +33,13 @@ public class storeFrag extends Fragment {
 
         adapter.setItems(new storeData().getItems());
 
+        adapter.setOnItemClickListener(new store_recyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+
+            }
+        });
+
         ExtendedFloatingActionButton store_register_button = view.findViewById(R.id.store_register_button);
         store_register_button.setOnClickListener(new View.OnClickListener() {
             @Override

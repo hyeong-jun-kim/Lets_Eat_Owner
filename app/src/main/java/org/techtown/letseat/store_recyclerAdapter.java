@@ -50,6 +50,18 @@ public class store_recyclerAdapter extends RecyclerView.Adapter<store_recyclerAd
         this.items = items;
     }
 
+    public interface OnItemClickListener
+    {
+        void onItemClick(View v, int pos);
+    }
+
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.mListener = listener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView storeIv;
@@ -69,7 +81,7 @@ public class store_recyclerAdapter extends RecyclerView.Adapter<store_recyclerAd
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION)
                     {
-
+                        mListener.onItemClick(v, pos);
                     }
                 }
             });
