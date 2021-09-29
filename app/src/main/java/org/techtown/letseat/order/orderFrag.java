@@ -43,8 +43,8 @@ public class orderFrag extends Fragment {
 
     private void prepareData(){
         list.clear();
-        list.add(new Orderdata("2021년 9월 27일 10시 00분",1,"마라탕",1, 1,"보통맛으로 해주세요","20,000"));
-        list.add(new Orderdata("2021년 9월 27일 10시 00분",1,"마라탕",1, 1,"보통맛으로 해주세요","20,000"));
+        list.add(new Orderdata("2021년 9월 27일 10시 00분","마라탕","1번 테이블", "보통맛으로 해주세요","20,000"));
+        list.add(new Orderdata("2021년 9월 27일 11시 00분","존나 마라탕","2번 테이블", "존나 매운맛으로 해주세요","30,000"));
     }
 
 }

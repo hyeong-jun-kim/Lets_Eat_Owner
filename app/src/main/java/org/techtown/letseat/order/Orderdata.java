@@ -1,64 +1,52 @@
 package org.techtown.letseat.order;
 
 public class Orderdata {
-    private String ordertimetext, menulist;
-    private String  requesttext, pricetext;
-    private int tablenumber, quantity, moremenu;
+    private String dateTv, menuTv, tablenameTv, requestTv, priceTv;
 
-
-    public Orderdata(String ordertimetext, int tablenumber, String menulist, int quantity, int moremenu, String requesttext, String pricetext){
-        this.ordertimetext = ordertimetext;
-        this.tablenumber = tablenumber;
-        this.menulist = menulist;
-        this.quantity = quantity;
-        this.moremenu = moremenu;
-        this.requesttext = requesttext;
-        this.pricetext = pricetext;
+    public Orderdata(String dateTv, String menuTv,String tablenameTv, String requestTv, String priceTv){
+        this.dateTv = dateTv;
+        this.menuTv = menuTv;
+        this.tablenameTv = tablenameTv;
+        this.requestTv = requestTv;
+        this.priceTv = priceTv;
     }
 
-    public String getOrdertimetext(){
-        return ordertimetext;
+    public String getDateTv() {
+        return dateTv;
     }
-    public void setOrdertimetext(String ordertimetext){
-        this.ordertimetext = ordertimetext;
+
+    public String getMenuTv() {
+        return menuTv;
     }
-    public int getTablenumber(){
-        return tablenumber;
+
+    public String getTablenameTv() {
+        return tablenameTv;
     }
-    public void setTablenumber(int tablenumber){
-        this.tablenumber = tablenumber;
+
+    public String getRequestTv() {
+        return requestTv;
     }
-    public String getTablenumbertext(){
-        return ordertimetext;
+
+    public String getPriceTv() {
+        return priceTv;
     }
-    public String getMenulist(){
-        return menulist;
+    public void setDateTv(String dateTv) {
+        this.dateTv = dateTv;
     }
-    public void setMenulist(String menulist){
-        this.menulist = menulist;
+
+    public void setMenuTv(String menuTv) {
+        this.menuTv = menuTv;
     }
-    public int getQuantity(){
-        return quantity;
+
+    public void setTablenameTv(String tablenameTv) {
+        this.tablenameTv = tablenameTv;
     }
-    public void setQuantity(int quantity){
-        this.quantity = quantity;
+
+    public void setRequestTv(String requestTv) {
+        this.requestTv = requestTv;
     }
-    public int getMoremenu(){
-        return moremenu;
-    }
-    public void setMoremenu(int moremenu){
-        this.moremenu = moremenu;
-    }
-    public String getRequesttext(){
-        return requesttext;
-    }
-    public void setRequesttext(String requesttext){
-        this.requesttext = requesttext;
-    }
-    public String getPricetext(){
-        return pricetext;
-    }
-    public void setPricetext(String pricetext){
-        this.pricetext = pricetext;
+
+    public void setPriceTv(String priceTv) {
+        this.priceTv = priceTv;
     }
 }
