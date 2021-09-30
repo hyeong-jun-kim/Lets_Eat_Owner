@@ -32,7 +32,7 @@ public class RestaurantFragment extends Fragment {
 
         adapter.setItems(new RestaurantData().getItems());
 
-        adapter.setOnItemClickListener(new store_recyclerAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new RestaurantRecycleAdapter.OnItemClickListener(){
             @Override
             public void onItemClick(View v, int pos) {
 

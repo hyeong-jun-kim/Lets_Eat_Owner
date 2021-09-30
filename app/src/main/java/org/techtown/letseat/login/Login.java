@@ -127,7 +127,7 @@ public class Login extends AppCompatActivity {
                         @Override // 응답 잘 받았을 때
                         public void onResponse(JSONObject response) {
                             // 자동 로그인 값 넣어주기
-                            SharedPreferences pref                                                                                                                                                                                                                                                                                          = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("email", input_email.getText().toString());
                             editor.putString("pwd", input_password.getText().toString());
