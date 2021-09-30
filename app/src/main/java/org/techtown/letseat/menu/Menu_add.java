@@ -95,7 +95,9 @@ public class Menu_add extends AppCompatActivity {
             }
         }
         return sb.toString();
-    }/*
+    }
+
+    /*
     // 로그인 POST 요청
     void login(){
         String url = "http://125.132.62.150:8000/letseat/login/normal";

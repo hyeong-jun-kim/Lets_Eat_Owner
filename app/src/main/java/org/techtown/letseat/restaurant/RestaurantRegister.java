@@ -30,7 +30,11 @@ import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
 public class RestaurantRegister extends AppCompatActivity {
+import java.io.ByteArrayOutputStream;
 
+public class Store_Register extends AppCompatActivity {
+
+    private final int GET_GALLERY_IMAGE = 200;
     private int aloneAble;
     private String resName, resType, phoneNumber, openTime, intro, businessNumber, location;
     private TextView textView;
@@ -39,11 +43,14 @@ public class RestaurantRegister extends AppCompatActivity {
     private RadioButton singleMealYes, singleMealNo;
     private Button sendBtn;
     private String[] items = {"한식", "중식", "일식", "양식"};
+    private ImageView restaurant_image;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_register);
+
         Spinner spinner = findViewById(R.id.spinner);
         textView = findViewById(R.id.textView);
         resNameEdit = findViewById(R.id.store_register_email);
@@ -56,6 +63,19 @@ public class RestaurantRegister extends AppCompatActivity {
         singleMealYes = findViewById(R.id.store_register_yes);
         singleMealNo = findViewById(R.id.store_register_no);
         sendBtn = findViewById(R.id.store_register_btn);
+
+        restaurant_image = (ImageView) findViewById(R.id.restaurant_image);
+        restaurant_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.
+                        setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                "image/*");
+                startActivityForResult(intent, GET_GALLERY_IMAGE);
+            }
+        });
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -114,6 +134,64 @@ public class RestaurantRegister extends AppCompatActivity {
                 registerStore();
             }
         });
+    }
+
+    //사진등록
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+
+            Uri selectedImageUri = data.getData();
+            restaurant_image.setImageURI(selectedImageUri);
+            BitmapDrawable drawable = (BitmapDrawable)restaurant_image.getDrawable();
+            bitmap = drawable.getBitmap();
+            bitmap = resize(bitmap);
+            String image = bitmapToByteArray(bitmap);
+        }
+    }
+    private Bitmap resize(Bitmap bm){
+        Configuration config = getResources().getConfiguration();
+        if(config.smallestScreenWidthDp>=800)
+            bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
+        else if(config.smallestScreenWidthDp>=600)
+            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
+        else if(config.smallestScreenWidthDp>=400)
+            bm = Bitmap.createScaledBitmap(bm, 200,  120, true);
+        else if(config.smallestScreenWidthDp>=360)
+            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
+        else
+            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
+        return bm;
+    }
+    /**비트맵을 바이너리 바이트배열로 바꾸어주는 메서드 */
+    public String bitmapToByteArray(Bitmap bitmap){
+        String image = "";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        image = "&image="+byteArrayToBinaryString(byteArray);
+        return image;
+    }
+    /**바이너리 바이트 배열을 스트링으로 바꾸어주는 메서드*/
+    public static String byteArrayToBinaryString(byte[] b){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < b.length; i++){
+            sb.append(byteToBinaryString(b[i]));
+        }
+        return sb.toString();
+    }
+    /**바이너리 바이트를 스트링으로 바꾸어주는 메서드*/
+    public static String byteToBinaryString(byte n){
+        StringBuilder sb = new StringBuilder("00000000");
+        for(int bit = 0;bit < 8; bit++){
+            if(((n>>bit)&1)>0){
+                sb.setCharAt(7-bit,'1');
+            }
+        }
+        return sb.toString();
     }
 
     // 식당 생성 POST 요청
