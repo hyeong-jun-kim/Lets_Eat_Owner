@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
 
         RestaurantItem item = items.get(position);
 
-        viewHolder.storeIv.setImageResource(item.getSrc());
+        viewHolder.storeIv.setImageBitmap(item.getBitmap());
         viewHolder.titleTv.setText(item.getTitle());
     }
 
