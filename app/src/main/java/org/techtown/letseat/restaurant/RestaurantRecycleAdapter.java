@@ -32,9 +32,7 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantRecycleAdapter.ViewHolder viewHolder, int position) {
-
         RestaurantItem item = items.get(position);
-
         viewHolder.storeIv.setImageBitmap(item.getBitmap());
         viewHolder.titleTv.setText(item.getTitle());
     }

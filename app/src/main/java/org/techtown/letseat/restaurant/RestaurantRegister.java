@@ -1,10 +1,7 @@
 package org.techtown.letseat.restaurant;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -22,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -32,13 +31,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ByteArrayOutputStream;
 
 public class RestaurantRegister extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
@@ -51,7 +47,7 @@ public class RestaurantRegister extends AppCompatActivity {
     private RadioGroup singleMealRadio;
     private RadioButton singleMealYes, singleMealNo;
     private Button sendBtn;
-    private String[] items = {"한식", "중식", "일식", "양식"};
+    private final String[] items = {"한식", "중식", "일식", "양식"};
     private ImageView restaurant_image = null;
     private Bitmap bitmap;
 
@@ -162,12 +158,11 @@ public class RestaurantRegister extends AppCompatActivity {
 
             Uri selectedImageUri = data.getData();
             restaurant_image.setImageURI(selectedImageUri);
-            BitmapDrawable drawable = (BitmapDrawable)restaurant_image.getDrawable();
+            BitmapDrawable drawable = (BitmapDrawable) restaurant_image.getDrawable();
             bitmap = drawable.getBitmap();
             // 사진 -> Blob 형태 전환
-            PhotoSave photoSave = new PhotoSave();
-            bitmap = photoSave.resize(bitmap, getResources());
-            image = photoSave.bitmapToByteArray(bitmap);
+            //bitmap = PhotoSave.resize(bitmap, getResources());
+            image = PhotoSave.BitmapToString(bitmap);
         }
     }
 
