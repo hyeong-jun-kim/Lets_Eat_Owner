@@ -57,8 +57,10 @@ public class RestaurantData {
                             for (int i = 0; i < 5; i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
                                 resName = jsonObject.getString("resName");
-                                image = jsonObject.getString("location");
-                                bitmap = getBitmap(image);
+                                //image = jsonObject.getString("image");
+                                //bitmap = PhotoSave.StringToBitmap(image);
+                                //bitmap = getBitmap(image);
+                                bitmap = null;
                                 RestaurantItem item = new RestaurantItem(bitmap, resName);
                                 items.add(item);
                             }
