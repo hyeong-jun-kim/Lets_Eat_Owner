@@ -25,8 +25,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
-import org.techtown.letseat.DatePickerFragment;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -114,9 +113,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
     // 회원가입 POST 요청
     public void sendRegisterRequest() {
-        String url = "http://125.132.62.150:8000/letseat/register/normal";
+        String url = "http://125.132.62.150:8000/letseat/register/owner/noraml";
         JSONObject postData = new JSONObject();
         try {
+
             postData.put("email", email_string);
             postData.put("password", pwd_string);
             postData.put("birthday", birthday_string);
@@ -152,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // 로그인 중복 확인 GET
     public void sendLoginCheckRequest(String email_string, TextView email) {
-        String url = "http://125.132.62.150:8000/letseat/register/email/check?email=" + email_string;
+        String url = "http://125.132.62.150:8000/letseat/register/owner/email/check?email=" + email_string;
         StringRequest request = new StringRequest(
                 Request.Method.GET,
                 url,

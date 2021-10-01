@@ -7,10 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
@@ -30,20 +27,10 @@ import com.kakao.usermgmt.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.AppHelper;
-import org.techtown.letseat.KaKaoCallBack;
+import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.MessageDigest;
 
 
@@ -124,7 +111,7 @@ public class Login extends AppCompatActivity {
 
     // 로그인 POST 요청
     void login(){
-            String url = "http://125.132.62.150:8000/letseat/login/normal";
+            String url = "http://125.132.62.150:8000/letseat/login/owner/normal";
             JSONObject postData = new JSONObject();
             try {
                 postData.put("email", email_string);
@@ -140,7 +127,7 @@ public class Login extends AppCompatActivity {
                         @Override // 응답 잘 받았을 때
                         public void onResponse(JSONObject response) {
                             // 자동 로그인 값 넣어주기
-                            SharedPreferences pref                                                                                                                                                                                                                                                                                          = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("email", input_email.getText().toString());
                             editor.putString("pwd", input_password.getText().toString());

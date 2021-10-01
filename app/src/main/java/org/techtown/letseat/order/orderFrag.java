@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.order.OrderAdapter;
-import org.techtown.letseat.order.Orderdata;
 
 import java.util.ArrayList;
 
@@ -33,8 +31,8 @@ public class orderFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order,container,false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.order_fragment,container,false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.add_menu_recyclerView);
         recyclerView.setHasFixedSize(true);
         adapter = new OrderAdapter(list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

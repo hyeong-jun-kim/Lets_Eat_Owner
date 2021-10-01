@@ -1,4 +1,4 @@
-package org.techtown.letseat.pay_test;
+package org.techtown.letseat.kakao_pay;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import org.techtown.letseat.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PayActivity extends AppCompatActivity {
+public class KaKaoPay extends AppCompatActivity {
 
     static RequestQueue requestQueue;
     static String productName; // 상품 이름
@@ -39,13 +39,13 @@ public class PayActivity extends AppCompatActivity {
     String tidPin;
     String pgToken;
 
-    public PayActivity() {
+    public KaKaoPay() {
 
     }
 
-    public PayActivity(String productName, String productPrice) {
-        PayActivity.productName = productName;
-        PayActivity.productPrice = productPrice;
+    public KaKaoPay(String productName, String productPrice) {
+        KaKaoPay.productName = productName;
+        KaKaoPay.productPrice = productPrice;
     }
 
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.storeItem;
-import org.techtown.letseat.store_recyclerAdapter;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package org.techtown.letseat.pay_test;
+package org.techtown.letseat.kakao_pay;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import org.techtown.letseat.R;
 
-public class Kakao_pay_test extends AppCompatActivity {
+public class KakaoPayTest extends AppCompatActivity {
 
     Button button;
     EditText editTextName;
@@ -31,9 +31,9 @@ public class Kakao_pay_test extends AppCompatActivity {
                 String name = editTextName.getText().toString();
                 String price = editTextPrice.getText().toString();
 
-                PayActivity payActivity = new PayActivity(name, price);
+                KaKaoPay kaKaoPay = new KaKaoPay(name, price);
 
-                Intent intent = new Intent(getApplicationContext(), payActivity.getClass());
+                Intent intent = new Intent(getApplicationContext(), kaKaoPay.getClass());
                 startActivity(intent);
 
             }

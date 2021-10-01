@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".menu.Menu_Management">
+    tools:context=".menu.Menu_management">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/add_menu_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

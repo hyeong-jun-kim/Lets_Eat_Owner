@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.techtown.letseat.R;
 
-public class wating_sample extends AppCompatActivity {
+public class WaitingSample extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
