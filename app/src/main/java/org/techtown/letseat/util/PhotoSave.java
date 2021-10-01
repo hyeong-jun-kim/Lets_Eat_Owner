@@ -3,26 +3,66 @@ package org.techtown.letseat.util;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
 public class PhotoSave {
-    /** 사진 크기 조정 */
-    public Bitmap resize(Bitmap bm, Resources res){
+    /*
+     * String형을 BitMap으로 변환시켜주는 함수
+     * */
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    /*
+     * Bitmap을 String형으로 변환
+     * */
+    public static String BitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
+        byte[] bytes = baos.toByteArray();
+        String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
+        return temp;
+    }
+
+    /*
+     * Bitmap을 byte배열로 변환
+     * */
+    public static byte[] BitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        return baos.toByteArray();
+    }
+
+    /**
+     * 사진 크기 조정
+     */
+    public Bitmap resize(Bitmap bm, Resources res) {
         Configuration config = res.getConfiguration();
-        if(config.smallestScreenWidthDp>=800)
+        if (config.smallestScreenWidthDp >= 800)
             bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
-        else if(config.smallestScreenWidthDp>=600)
+        else if (config.smallestScreenWidthDp >= 600)
             bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
-        else if(config.smallestScreenWidthDp>=400)
-            bm = Bitmap.createScaledBitmap(bm, 200,  120, true);
-        else if(config.smallestScreenWidthDp>=360)
+        else if (config.smallestScreenWidthDp >= 400)
+            bm = Bitmap.createScaledBitmap(bm, 200, 120, true);
+        else if (config.smallestScreenWidthDp >= 360)
             bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
         else
             bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
         return bm;
     }
-    /**비트맵을 바이너리 바이트배열로 바꾸어주는 메서드 */
+
+    /*
+    //비트맵을 바이너리 바이트배열로 바꾸어주는 메서드
     public String bitmapToByteArray(Bitmap bitmap){
         String image = "";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -31,7 +71,7 @@ public class PhotoSave {
         image = "&image="+byteArrayToBinaryString(byteArray);
         return image;
     }
-    /**바이너리 바이트 배열을 스트링으로 바꾸어주는 메서드*/
+    // 바이너리 바이트 배열을 스트링으로 바꾸어주는 메서드
     public String byteArrayToBinaryString(byte[] b){
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < b.length; i++){
@@ -39,7 +79,7 @@ public class PhotoSave {
         }
         return sb.toString();
     }
-    /**바이너리 바이트를 스트링으로 바꾸어주는 메서드*/
+    // 바이너리 바이트를 스트링으로 바꾸어주는 메서드
     public String byteToBinaryString(byte n){
         StringBuilder sb = new StringBuilder("00000000");
         for(int bit = 0;bit < 8; bit++){
@@ -48,5 +88,5 @@ public class PhotoSave {
             }
         }
         return sb.toString();
-    }
+    }*/
 }
