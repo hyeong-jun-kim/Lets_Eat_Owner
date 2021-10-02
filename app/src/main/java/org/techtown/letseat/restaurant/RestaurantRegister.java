@@ -167,7 +167,7 @@ public class RestaurantRegister extends AppCompatActivity {
             // 사진 -> Blob 형태 전환
             PhotoSave photoSave = new PhotoSave();
             bitmap = photoSave.resize(bitmap, getResources());
-            image = photoSave.bitmapToByteArray(bitmap);
+            image = photoSave.BitmapToByteArray(bitmap);
         }
     }
 
