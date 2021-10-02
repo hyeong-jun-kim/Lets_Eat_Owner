@@ -49,7 +49,6 @@ public class RestaurantFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.store_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
-        adapter.setItems(items);
         adapter.setOnItemClickListener(new RestaurantRecycleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -96,8 +95,9 @@ public class RestaurantFragment extends Fragment {
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 RestaurantItem item = new RestaurantItem(bitmap, resName);
                                 items.add(item);
-                                adapter.notifyDataSetChanged();
                             }
+                            adapter.setItems(items);
+                            adapter.notifyDataSetChanged();
                             Log.d("응답", response.toString());
                         } catch (JSONException e) {
                             Log.d("예외", e.toString());

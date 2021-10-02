@@ -22,7 +22,6 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
     @NonNull
     @Override
     public RestaurantRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_recycle, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         context = parent.getContext();

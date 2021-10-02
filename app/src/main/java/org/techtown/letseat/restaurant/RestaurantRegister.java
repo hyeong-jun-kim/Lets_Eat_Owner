@@ -160,12 +160,9 @@ public class RestaurantRegister extends AppCompatActivity {
             restaurant_image.setImageURI(selectedImageUri);
             BitmapDrawable drawable = (BitmapDrawable) restaurant_image.getDrawable();
             bitmap = drawable.getBitmap();
-            // 사진 -> Blob 형태 전환
-            //bitmap = PhotoSave.resize(bitmap, getResources());
             image = PhotoSave.BitmapToString(bitmap);
         }
     }
-
     // 식당 생성 POST 요청
     void registerStore() {
         String url = "http://125.132.62.150:8000/letseat/store/register";
