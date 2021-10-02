@@ -160,6 +160,7 @@ public class RestaurantRegister extends AppCompatActivity {
             restaurant_image.setImageURI(selectedImageUri);
             BitmapDrawable drawable = (BitmapDrawable) restaurant_image.getDrawable();
             bitmap = drawable.getBitmap();
+            bitmap = PhotoSave.resize(bitmap, getResources());
             image = PhotoSave.BitmapToString(bitmap);
         }
     }
