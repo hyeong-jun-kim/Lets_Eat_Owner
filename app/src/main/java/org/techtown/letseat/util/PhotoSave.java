@@ -14,16 +14,7 @@ public class PhotoSave {
      */
     public static Bitmap resize(Bitmap bm, Resources res) {
         Configuration config = res.getConfiguration();
-        if (config.smallestScreenWidthDp >= 800)
-            bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
-        else if (config.smallestScreenWidthDp >= 600)
-            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
-        else if (config.smallestScreenWidthDp >= 400)
-            bm = Bitmap.createScaledBitmap(bm, 200, 120, true);
-        else if (config.smallestScreenWidthDp >= 360)
-            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
-        else
-            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
+        bm = Bitmap.createScaledBitmap(bm, 800, 800, true);
         return bm;
     }
 
@@ -46,7 +37,7 @@ public class PhotoSave {
      * */
     public static String BitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 60, baos);
         byte[] bytes = baos.toByteArray();
         String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
         return temp;
@@ -57,7 +48,7 @@ public class PhotoSave {
      * */
     public static byte[] BitmapToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         return baos.toByteArray();
     }
 
