@@ -9,6 +9,24 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 public class PhotoSave {
+    /**
+     * 사진 크기 조정
+     */
+    public static Bitmap resize(Bitmap bm, Resources res) {
+        Configuration config = res.getConfiguration();
+        if (config.smallestScreenWidthDp >= 800)
+            bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
+        else if (config.smallestScreenWidthDp >= 600)
+            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
+        else if (config.smallestScreenWidthDp >= 400)
+            bm = Bitmap.createScaledBitmap(bm, 200, 120, true);
+        else if (config.smallestScreenWidthDp >= 360)
+            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
+        else
+            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
+        return bm;
+    }
+
     /*
      * String형을 BitMap으로 변환시켜주는 함수
      * */
@@ -43,26 +61,7 @@ public class PhotoSave {
         return baos.toByteArray();
     }
 
-    /**
-     * 사진 크기 조정
-     */
-    public Bitmap resize(Bitmap bm, Resources res) {
-        Configuration config = res.getConfiguration();
-        if (config.smallestScreenWidthDp >= 800)
-            bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
-        else if (config.smallestScreenWidthDp >= 600)
-            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
-        else if (config.smallestScreenWidthDp >= 400)
-            bm = Bitmap.createScaledBitmap(bm, 200, 120, true);
-        else if (config.smallestScreenWidthDp >= 360)
-            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
-        else
-            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
-        return bm;
-    }
-
-    /*
-    //비트맵을 바이너리 바이트배열로 바꾸어주는 메서드
+/*    // 비트맵을 바이너리 바이트배열로 바꾸어주는 메서드
     public String bitmapToByteArray(Bitmap bitmap){
         String image = "";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
