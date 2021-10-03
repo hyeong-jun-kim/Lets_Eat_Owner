@@ -18,9 +18,10 @@
         android:layout_margin="16dp"
         android:layout_gravity="bottom|right"
         android:fontFamily="@font/notosansbold"
-        android:textColor="#000000"
+        android:textColor="#ffffff"
         android:textSize="15dp"
         android:text="메뉴 등록"
         android:backgroundTint="#ED6868"
-        app:icon="@drawable/add"/>
+        app:icon="@drawable/add"
+        app:iconTint="@color/white"/>
 </FrameLayout>
