@@ -38,21 +38,3 @@
             app:icon="@drawable/add"/>
     </FrameLayout>
 </FrameLayout>
-<!-- <androidx.appcompat.widget.AppCompatButton
-android:id="@+id/store_register_button"
-android:layout_width="300dp"
-android:layout_height="wrap_content"
-android:fontFamily="@font/notosansbold"
-android:textColor="#ffffff"
-android:background="@drawable/round_circle3"
-android:text="가게 등록"
-android:textSize="24sp" />
-<androidx.appcompat.widget.AppCompatButton
-android:id="@+id/menu_management_button"
-android:layout_width="300dp"
-android:layout_height="wrap_content"
-android:fontFamily="@font/notosansbold"
-android:textColor="#ffffff"
-android:background="@drawable/round_circle3"
-android:text="식당 관리"
-android:textSize="24sp" /> !-->
