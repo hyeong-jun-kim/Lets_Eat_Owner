@@ -14,7 +14,7 @@ public class PhotoSave {
      */
     public static Bitmap resize(Bitmap bm, Resources res) {
         Configuration config = res.getConfiguration();
-        bm = Bitmap.createScaledBitmap(bm, 800, 800, true);
+        bm = Bitmap.createScaledBitmap(bm, 600, 600, true);
         return bm;
     }
 

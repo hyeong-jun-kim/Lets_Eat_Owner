@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.json.JSONArray;
@@ -30,7 +31,9 @@ import java.util.ArrayList;
 
 public class RestaurantFragment extends Fragment {
     ArrayList<RestaurantItem> items = new ArrayList<>();
+    ArrayList<Integer> resIdList = new ArrayList<>();
     RestaurantRecycleAdapter adapter = new RestaurantRecycleAdapter();
+    int resId;
     String image;
     Bitmap bitmap;
     private View view;
@@ -76,6 +79,7 @@ public class RestaurantFragment extends Fragment {
         return view;
     }
 
+    // 식당 리스트 가져오기
     void getResData() {
         String url = "http://125.132.62.150:8000/letseat/store/findAll";
         JSONArray getData = new JSONArray();
@@ -90,11 +94,14 @@ public class RestaurantFragment extends Fragment {
                             String restype, resName, location;
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject jsonObject = (JSONObject) response.get(i);
+                                // 데이터 정보
                                 resName = jsonObject.getString("resName");
                                 image = jsonObject.getString("image");
+                                resId = jsonObject.getInt("resId");
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 RestaurantItem item = new RestaurantItem(bitmap, resName);
                                 items.add(item);
+
                             }
                             adapter.setItems(items);
                             adapter.notifyDataSetChanged();
@@ -109,6 +116,32 @@ public class RestaurantFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("에러", error.toString());
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        //AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
+    }
+
+    // 특정 식당 데이터 가져오기
+    void getResData(int pos) {
+        int resId = resIdList.get(pos);
+        String url = "http://125.132.62.150:8000/letseat/store/findOne?resId=" + resId;
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
                     }
                 }
         );
