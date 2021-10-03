@@ -1,5 +1,6 @@
 package org.techtown.letseat.restaurant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,15 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
 import org.techtown.letseat.R;
+import org.techtown.letseat.menu.Menu_add;
 
 public class RestaurantItemMenuFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ExtendedFloatingActionButton menu_register_button;
 
     public RestaurantItemMenuFragment() {
         // Required empty public constructor
@@ -36,6 +41,16 @@ public class RestaurantItemMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.restaurant_item_menu_fragment, container, false);
+        View view = inflater.inflate(R.layout.restaurant_item_menu_fragment, container, false);
+
+        menu_register_button = view.findViewById(R.id.menu_register_button);
+        menu_register_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Menu_add.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }
