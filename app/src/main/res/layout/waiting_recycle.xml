@@ -22,7 +22,7 @@
             android:fontFamily="@font/notosansregular"
             android:text="대기자 번호"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/waiting_number"

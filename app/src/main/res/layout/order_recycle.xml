@@ -25,6 +25,7 @@
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:textSize="15dp"
+                    android:textColor="#000000"
                     android:id="@+id/dateTv"
                     android:fontFamily="@font/notosansregular"
                     android:includeFontPadding="false"/>
@@ -33,6 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="Table Number"
                     android:textSize="30dp"
+                    android:textColor="#000000"
                     android:id="@+id/tablenameTv"
                     android:fontFamily="@font/notosansbold"
                     android:includeFontPadding="false"/>
@@ -41,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:text="Menu"
                     android:textSize="15dp"
+                    android:textColor="#000000"
                     android:id="@+id/menuTv"
                     android:fontFamily="@font/notosansregular"/>
                 <TextView
@@ -48,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:text="Request"
                     android:textSize="15dp"
+                    android:textColor="#000000"
                     android:id="@+id/requestTv"
                     android:fontFamily="@font/notosansregular"
                     android:includeFontPadding="false"/>
@@ -56,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:text="Price"
                     android:textSize="15dp"
+                    android:textColor="#000000"
                     android:id="@+id/priceTv"
                     android:fontFamily="@font/notosansregular"/>
             </LinearLayout>
