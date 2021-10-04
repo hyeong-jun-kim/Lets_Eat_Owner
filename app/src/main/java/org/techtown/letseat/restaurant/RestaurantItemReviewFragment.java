@@ -6,36 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
+import org.techtown.letseat.RestItemReviewAdapter;
+import org.techtown.letseat.RestItemReviewData;
 
 public class RestaurantItemReviewFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    public RestaurantItemReviewFragment() {
-        // Required empty public constructor
-    }
-
-    public static RestaurantItemReviewFragment newInstance(String param1, String param2) {
-        RestaurantItemReviewFragment fragment = new RestaurantItemReviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
+    View view;
+    private RestItemReviewAdapter adapter = new RestItemReviewAdapter();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.restaurant_item_review_fragment, container, false);
+        view = inflater.inflate(R.layout.restaurant_item_review_fragment, container, false);
+
+        adapter.setItems(new RestItemReviewData().getItems());
+
+        RecyclerView recyclerView = view.findViewById(R.id.rest_item_review_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
 }
