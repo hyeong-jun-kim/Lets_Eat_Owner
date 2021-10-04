@@ -32,7 +32,7 @@
             android:name=".menu.Menu_management"
             android:exported="true" />
         <activity
-            android:name=".restaurant.RestaurantRegister"
+            android:name=".restaurant.RestaurantRegisterActivity"
             android:exported="true" />
         <activity
             android:name=".order.ItemActivity"

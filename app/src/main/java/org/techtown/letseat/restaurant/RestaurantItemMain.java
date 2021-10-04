@@ -8,30 +8,31 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.R;
+import org.techtown.letseat.store.Store_Item_info_frag;
 import org.techtown.letseat.util.ViewPagerAdapter;
 
 
 public class RestaurantItemMain extends AppCompatActivity {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private RestaurantItemInfoFragment restaurant_Item_Info_Fragment;
+    private Store_Item_info_frag restaurant_Item_Info_Fragment;
     private RestaurantItemMenuFragment restaurant_Item_Menu_fragment;
     private RestaurantItemReviewFragment restaurant_Item_review_fragment;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle saveBundle) {
+        super.onCreate(saveBundle);
         setContentView(R.layout.restaurant_item);
-
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
 
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        restaurant_Item_Info_Fragment = new RestaurantItemInfoFragment();
+        restaurant_Item_Info_Fragment = new Store_Item_info_frag();
         restaurant_Item_Menu_fragment = new RestaurantItemMenuFragment();
         restaurant_Item_review_fragment = new RestaurantItemReviewFragment();
 

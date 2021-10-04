@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-
     private RestaurantFragment RestaurantFragment;
     private org.techtown.letseat.order.orderFrag orderFrag;
     private WaitingFragment WaitingFragment;

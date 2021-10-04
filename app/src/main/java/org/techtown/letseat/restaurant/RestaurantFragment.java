@@ -17,13 +17,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.store.Store_Item_info_frag;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
@@ -55,7 +57,10 @@ public class RestaurantFragment extends Fragment {
         adapter.setOnItemClickListener(new RestaurantRecycleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-
+                // 액티비티 시작
+                Intent intent = new Intent((MainActivity) getActivity(), RestaurantItemMain.class);
+                Store_Item_info_frag.resId = resIdList.get(pos);
+                startActivity(intent);
             }
         });
 
@@ -63,11 +68,10 @@ public class RestaurantFragment extends Fragment {
         store_register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RestaurantRegister.class);
+                Intent intent = new Intent(getActivity(), RestaurantRegisterActivity.class);
                 startActivity(intent);
             }
         });
-
         /*Button menu_management_button = view.findViewById(R.id.menu_management_button);
         menu_management_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +105,7 @@ public class RestaurantFragment extends Fragment {
                                 bitmap = PhotoSave.StringToBitmap(image);
                                 RestaurantItem item = new RestaurantItem(bitmap, resName);
                                 items.add(item);
+                                resIdList.add(resId);
 
                             }
                             adapter.setItems(items);
@@ -120,33 +125,7 @@ public class RestaurantFragment extends Fragment {
                 }
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        //AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
-
-    // 특정 식당 데이터 가져오기
-    void getResData(int pos) {
-        int resId = resIdList.get(pos);
-        String url = "http://125.132.62.150:8000/letseat/store/findOne?resId=" + resId;
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        //AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
 }

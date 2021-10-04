@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,16 +60,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView3"
+                        <EditText
+                            android:id="@+id/info_resName"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:maxLength="50"
-                            android:text="하오탕"
                             android:textColor="#000000"
-                            android:textSize="20dp" />
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
 
                     </FrameLayout>
                 </LinearLayout>
@@ -92,16 +92,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView5"
-                            android:layout_width="match_parent"
+                        <EditText
+                            android:id="@+id/info_phoneNumber"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:maxLength="20"
-                            android:text="031-000-0000"
                             android:textColor="#000000"
-                            android:textSize="20dp" />
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
+
                     </FrameLayout>
                 </LinearLayout>
 
@@ -124,16 +124,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView7"
-                            android:layout_width="match_parent"
+                        <EditText
+                            android:id="@+id/info_openTime"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:maxLength="40"
-                            android:text="일요일 휴무, 09:00 ~ 22:00"
                             android:textColor="#000000"
-                            android:textSize="20dp" />
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -156,16 +155,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView9"
-                            android:layout_width="match_parent"
+                        <EditText
+                            android:id="@+id/info_resIntro"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:maxLength="500"
-                            android:text="식당 소개글 식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글식당 소개글"
                             android:textColor="#000000"
-                            android:textSize="18dp" />
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -188,18 +186,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView11"
+                        <EditText
+                            android:id="@+id/Info_businessNumber"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:inputType="number"
-                            android:maxLength="20"
-                            android:text="000-0000-000"
                             android:textColor="#000000"
-                            android:textSize="20dp" />
-
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
                     </FrameLayout>
                 </LinearLayout>
 
@@ -222,19 +217,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/info_textView13"
+                        <EditText
+                            android:id="@+id/info_location"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/register_edge"
+                            android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:maxLength="100"
-                            android:text="경기도 성남시 수정구 태평동 3045"
                             android:textColor="#000000"
-                            android:textSize="17dp" />
-
+                            android:textColorHint="#939393"
+                            android:textSize="13dp" />
                     </FrameLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosansregular"
+                    android:text="식당 사진"
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-20dp"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/info_image"
+                            android:layout_width="78dp"
+                            android:layout_height="73dp"
+                            android:layout_marginTop="20dp"
+                            app:srcCompat="@drawable/ic_image" />
+                    </FrameLayout>
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/info_textView14"
@@ -245,15 +266,38 @@
                     android:textColor="#000000"
                     android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/info_textView15"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:id="@+id/info_singlemeal"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/register_edge"
-                    android:fontFamily="@font/notosansregular"
-                    android:text="가능"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:layout_marginTop="-10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/info_singlemeal_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#ED6868"
+                        android:checked="false"
+                        android:fontFamily="@font/notosansregular"
+                        android:text="가능"
+                        android:textColor="#000000"
+                        android:textSize="13dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                    <RadioButton
+                        android:id="@+id/info_singlemeal_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:buttonTint="#ED6868"
+                        android:fontFamily="@font/notosansregular"
+                        android:text="불가능"
+                        android:textColor="#000000"
+                        android:textSize="13dp"
+                        tools:ignore="TouchTargetSizeCheck" />
+
+                </RadioGroup>
 
                 <TextView
                     android:id="@+id/info_textView16"
@@ -270,21 +314,24 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/info_textView17"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/info_textView18"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/register_edge"
-                        android:fontFamily="@font/notosansregular"
-                        android:text="한식"
-                        android:textColor="#000000"
-                        android:textSize="18dp" />
+                        android:text="TextView"
+                        android:textSize="13dp" />
+
+                    <Spinner
+                        android:id="@+id/info_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/info_edit_btn"
+        android:id="@+id/info_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
