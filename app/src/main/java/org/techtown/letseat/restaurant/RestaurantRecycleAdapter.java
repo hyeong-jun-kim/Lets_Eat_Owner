@@ -35,14 +35,14 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
         viewHolder.storeIv.setImageBitmap(item.getBitmap());
         viewHolder.titleTv.setText(item.getTitle());
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent =  new Intent(view.getContext(), RestaurantItemMain.class);
                 intent.putExtra("number", position);
                 view.getContext().startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override

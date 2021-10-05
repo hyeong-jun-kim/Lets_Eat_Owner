@@ -36,7 +36,7 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
-public class RestaurantRegister extends AppCompatActivity {
+public class RestaurantRegisterActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
     private int aloneAble;
     private String resName, resType, phoneNumber, openTime, intro,
