@@ -1,12 +1,15 @@
 package org.techtown.letseat.restaurant;
 
+import android.graphics.Bitmap;
+
 public class RestaurantItem {
 
     private String title;
-    private int src;
-    public RestaurantItem(int src, String title) {
+    private Bitmap bitmap;
 
-        this.src = src;
+    public RestaurantItem(Bitmap bitmap, String title) {
+
+        this.bitmap = bitmap;
         this.title = title;
 
     }
@@ -20,11 +23,11 @@ public class RestaurantItem {
     }
 
 
-    public int getSrc() {
-        return src;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setSrc(int src) {
-        this.src = src;
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }

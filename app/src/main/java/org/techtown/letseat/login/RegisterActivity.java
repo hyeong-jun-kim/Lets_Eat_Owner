@@ -1,8 +1,5 @@
 package org.techtown.letseat.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,8 +25,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.R;
+import org.techtown.letseat.util.AppHelper;
 
 public class RegisterActivity extends AppCompatActivity {
     private String birthday_string, email_string, pwd_string, name_string, pwd_check_string, gender;
@@ -116,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
         String url = "http://125.132.62.150:8000/letseat/register/owner/noraml";
         JSONObject postData = new JSONObject();
         try {
-
             postData.put("email", email_string);
             postData.put("password", pwd_string);
             postData.put("birthday", birthday_string);

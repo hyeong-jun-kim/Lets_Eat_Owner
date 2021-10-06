@@ -1,7 +1,5 @@
 package org.techtown.letseat.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -17,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,9 +27,9 @@ import com.kakao.usermgmt.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.util.AppHelper;
 
 import java.security.MessageDigest;
 
@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
     private ImageView fakeKakao;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
-
+    private String ownerId;
     private KaKaoCallBack kaKaoCallBack;
 
     @Override
@@ -127,16 +127,14 @@ public class Login extends AppCompatActivity {
                         @Override // 응답 잘 받았을 때
                         public void onResponse(JSONObject response) {
                             // 자동 로그인 값 넣어주기
-                            SharedPreferences pref                                                                                                                                                                                                                                                                                          = getSharedPreferences("login", MODE_PRIVATE);
+                            SharedPreferences pref = getSharedPreferences("login",MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("email", input_email.getText().toString());
                             editor.putString("pwd", input_password.getText().toString());
                             editor.commit();
-                            // 화면 전환
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-
                         }
                     },
                     new Response.ErrorListener() {
@@ -181,6 +179,7 @@ public class Login extends AppCompatActivity {
         catch (Exception e) {
         }
     }
+
     public void println(String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }

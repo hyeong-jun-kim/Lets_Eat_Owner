@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
@@ -24,30 +23,26 @@ public class RestaurantRecycleAdapter extends RecyclerView.Adapter<RestaurantRec
     @NonNull
     @Override
     public RestaurantRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_recycle, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         context = parent.getContext();
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RestaurantRecycleAdapter.ViewHolder viewHolder, int position) {
-
         RestaurantItem item = items.get(position);
-
-        viewHolder.storeIv.setImageResource(item.getSrc());
+        viewHolder.storeIv.setImageBitmap(item.getBitmap());
         viewHolder.titleTv.setText(item.getTitle());
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent =  new Intent(view.getContext(), RestaurantItemMain.class);
                 intent.putExtra("number", position);
                 view.getContext().startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override

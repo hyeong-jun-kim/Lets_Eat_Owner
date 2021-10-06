@@ -32,7 +32,7 @@
             android:name=".menu.Menu_management"
             android:exported="true" />
         <activity
-            android:name=".restaurant.RestaurantRegister"
+            android:name=".restaurant.RestaurantRegisterActivity"
             android:exported="true" />
         <activity
             android:name=".order.ItemActivity"
@@ -40,6 +40,7 @@
         <activity
             android:name=".restaurant.RestaurantItemMain"
             android:exported="true"/>
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="d8aeb3d2d3af0540824e12d6ba383ba4" />

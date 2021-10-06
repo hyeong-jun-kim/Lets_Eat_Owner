@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".restaurant.RestaurantRegisterActivity">
+    tools:context=".store.Store_Register">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,18 +14,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/info_textView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/notosansbold"
             android:gravity="center|bottom"
-            android:text="식당 등록"
+            android:text="식당 정보"
             android:textColor="#000000"
             android:textSize="20dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#FFFF0000" />
     </LinearLayout>
 
     <ScrollView
@@ -45,6 +42,7 @@
                 android:padding="20dp">
 
                 <TextView
+                    android:id="@+id/info_textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -63,13 +61,11 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_email"
+                            android:id="@+id/info_resName"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="식당 이름을 입력해주세요."
-                            android:maxLength="50"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
@@ -78,6 +74,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/info_textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -96,21 +93,20 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_phoneNumber"
-                            android:layout_width="match_parent"
+                            android:id="@+id/info_phoneNumber"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="식당 전화번호를 입력해주세요."
-                            android:inputType="number"
-                            android:maxLength="20"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
+
                     </FrameLayout>
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/info_textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -129,13 +125,11 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_openTime"
-                            android:layout_width="match_parent"
+                            android:id="@+id/info_openTime"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="운영 시간을 입력해주세요."
-                            android:maxLength="40"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
@@ -143,6 +137,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/info_textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -161,13 +156,11 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_intro"
-                            android:layout_width="match_parent"
+                            android:id="@+id/info_resIntro"
+                            android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="식당 소개글을 입력해주세요."
-                            android:maxLength="500"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
@@ -175,6 +168,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/info_textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -193,22 +187,19 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_businessNumber"
+                            android:id="@+id/Info_businessNumber"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="사업자 등록번호를 입력해주세요."
-                            android:inputType="number"
-                            android:maxLength="10"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
-
                     </FrameLayout>
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/info_textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -227,17 +218,14 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/store_register_location"
+                            android:id="@+id/info_location"
                             android:layout_width="290dp"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#ED6868"
                             android:fontFamily="@font/notosansregular"
-                            android:hint="식당 위치를 입력해주세요."
-                            android:maxLength="100"
                             android:textColor="#000000"
                             android:textColorHint="#939393"
                             android:textSize="13dp" />
-
                     </FrameLayout>
                 </LinearLayout>
 
@@ -260,7 +248,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:id="@+id/restaurant_image"
+                            android:id="@+id/info_image"
                             android:layout_width="78dp"
                             android:layout_height="73dp"
                             android:layout_marginTop="20dp"
@@ -268,7 +256,9 @@
                     </FrameLayout>
                 </LinearLayout>
 
+
                 <TextView
+                    android:id="@+id/info_textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
@@ -277,14 +267,14 @@
                     android:textSize="15dp" />
 
                 <RadioGroup
-                    android:id="@+id/store_register_singleMeal"
+                    android:id="@+id/info_singlemeal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="-10dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/store_register_yes"
+                        android:id="@+id/info_singlemeal_yes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="#ED6868"
@@ -296,7 +286,7 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <RadioButton
-                        android:id="@+id/store_register_no"
+                        android:id="@+id/info_singlemeal_no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="60dp"
@@ -308,25 +298,30 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                 </RadioGroup>
+
                 <TextView
+                    android:id="@+id/info_textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosansregular"
                     android:text="식당 카테고리"
                     android:textColor="#000000"
                     android:textSize="15dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/info_textView18"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:text="TextView"
                         android:textSize="13dp" />
+
                     <Spinner
-                        android:id="@+id/spinner"
+                        android:id="@+id/info_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -334,17 +329,17 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/store_register_btn"
+        android:id="@+id/info_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_marginBottom="10dp"
-        android:fontFamily="@font/notosansbold"
-        android:layout_gravity="center"
-        android:textColor="#ffffff"
         android:background="@drawable/round_circle3"
-        android:textSize="15sp"
-        android:text="등록"
-        />
+        android:fontFamily="@font/notosansbold"
+        android:text="정보 수정하기"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
 </LinearLayout>
