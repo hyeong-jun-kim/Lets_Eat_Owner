@@ -1,6 +1,4 @@
- package org.techtown.letseat;
-
-import androidx.appcompat.app.AppCompatActivity;
+package org.techtown.letseat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +7,8 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,6 +34,9 @@ import org.techtown.letseat.util.AppHelper;
         title = findViewById(R.id.title);
         subtitle = findViewById(R.id.subtitle);
         copyright = findViewById(R.id.copyright);
+        SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
+        email_string = pref.getString("email", "");
+        pwd_string = pref.getString("pwd", "");
         anim_fade_in_1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_1);
         anim_fade_in_2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_2);
         subtitle.startAnimation(anim_fade_in_2);
@@ -42,9 +45,6 @@ import org.techtown.letseat.util.AppHelper;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences pref = getSharedPreferences("login", MODE_PRIVATE);
-                email_string = pref.getString("email", "");
-                pwd_string = pref.getString("pwd", "");
                 if (!email_string.isEmpty() && !pwd_string.isEmpty()) {
                     login();
                 } else {
@@ -53,7 +53,7 @@ import org.techtown.letseat.util.AppHelper;
                     finish();
                 }
             }
-        }, 2000);
+        }, 50);
     }
 
     // 로그인 POST 요청

@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
-import org.techtown.letseat.store.Store_Item_info_frag;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
@@ -59,7 +58,7 @@ public class RestaurantFragment extends Fragment {
             public void onItemClick(View v, int pos) {
                 // 액티비티 시작
                 Intent intent = new Intent((MainActivity) getActivity(), RestaurantItemMain.class);
-                Store_Item_info_frag.resId = resIdList.get(pos);
+                RestaurantItemInfoFragment.resId = resIdList.get(pos);
                 startActivity(intent);
             }
         });
@@ -82,7 +81,6 @@ public class RestaurantFragment extends Fragment {
         }); */
         return view;
     }
-
     // 식당 리스트 가져오기
     void getResData() {
         String url = "http://125.132.62.150:8000/letseat/store/findAll";
