@@ -77,7 +77,7 @@ public class Menu_add extends AppCompatActivity {
             menuImage.setImageURI(selectedImageUri);
             BitmapDrawable drawable = (BitmapDrawable) menuImage.getDrawable();
             bitmap = drawable.getBitmap();
-            bitmap = PhotoSave.resize(bitmap, getResources());
+            bitmap = PhotoSave.resizeMenu(bitmap, getResources());
             image = PhotoSave.BitmapToString(bitmap);
         }
     }

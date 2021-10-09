@@ -54,6 +54,5 @@ public class RestaurantItemMain extends AppCompatActivity {
                 super.onTabReselected(tab);
             }
         });
-
     }
 }
