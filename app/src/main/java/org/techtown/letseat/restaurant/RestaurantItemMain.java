@@ -12,7 +12,7 @@ import org.techtown.letseat.util.ViewPagerAdapter;
 
 
 public class RestaurantItemMain extends AppCompatActivity {
-
+    public static int resId;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -20,6 +20,9 @@ public class RestaurantItemMain extends AppCompatActivity {
     private RestaurantItemMenuFragment restaurant_Item_Menu_fragment;
     private RestaurantItemReviewFragment restaurant_Item_review_fragment;
 
+    public static int getResId() {
+        return resId;
+    }
 
     @Override
     protected void onCreate(Bundle saveBundle) {

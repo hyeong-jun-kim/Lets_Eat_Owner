@@ -23,7 +23,6 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
@@ -57,8 +56,8 @@ public class RestaurantFragment extends Fragment {
             @Override
             public void onItemClick(View v, int pos) {
                 // 액티비티 시작
-                Intent intent = new Intent((MainActivity) getActivity(), RestaurantItemMain.class);
-                RestaurantItemInfoFragment.resId = resIdList.get(pos);
+                Intent intent = new Intent(getActivity(), RestaurantItemMain.class);
+                RestaurantItemMain.resId = resIdList.get(pos);
                 startActivity(intent);
             }
         });
@@ -71,14 +70,6 @@ public class RestaurantFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        /*Button menu_management_button = view.findViewById(R.id.menu_management_button);
-        menu_management_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Menu_Management.class);
-                startActivity(intent);
-            }
-        }); */
         return view;
     }
     // 식당 리스트 가져오기

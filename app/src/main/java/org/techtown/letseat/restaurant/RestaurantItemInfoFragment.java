@@ -41,7 +41,7 @@ import org.techtown.letseat.util.PhotoSave;
 import static android.app.Activity.RESULT_OK;
 
 public class RestaurantItemInfoFragment extends Fragment {
-    public static int resId = 0;
+    public static int resId;
     private final int GET_GALLERY_IMAGE = 200;
     private final String[] items = {"한식", "중식", "일식", "양식"};
     private String name, phoneNumber, openTime, resIntro, businessNumber, resType, location, image;
@@ -59,8 +59,8 @@ public class RestaurantItemInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        resId = RestaurantItemMain.getResId();
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle saveBundle) {
@@ -79,7 +79,7 @@ public class RestaurantItemInfoFragment extends Fragment {
         introEdit = view.findViewById(R.id.info_resIntro);
         businessEdit = view.findViewById(R.id.Info_businessNumber);
         locationEdit = view.findViewById(R.id.info_location);
-        restaurant_image = (ImageView) view.findViewById(R.id.restaurant_image);
+        restaurant_image = view.findViewById(R.id.restaurant_image);
         info_edit_btn = view.findViewById(R.id.info_btn);
         info_edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +117,13 @@ public class RestaurantItemInfoFragment extends Fragment {
                         break;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 textView.setText(resType);
             }
         });
-        restaurant_image = (ImageView) view.findViewById(R.id.info_image);
+        restaurant_image = view.findViewById(R.id.info_image);
         restaurant_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -284,7 +285,6 @@ public class RestaurantItemInfoFragment extends Fragment {
         AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
         AppHelper.requestQueue.add(request);
     }
-
     public String getResType(String resType) {
         String typeName = null;
         int pos = 0;
