@@ -1,41 +1,67 @@
 package org.techtown.letseat.menu;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.techtown.letseat.R;
-
-import java.io.ByteArrayOutputStream;
+import org.techtown.letseat.restaurant.RestaurantItemMain;
+import org.techtown.letseat.util.PhotoSave;
 
 public class Menu_add extends AppCompatActivity {
 
     private final int GET_GALLERY_IMAGE = 200;
     private EditText menuNameEdit, menuPriceEdit, menuDescriptionEdit;
+    private Button menuAddButton;
     private ImageView menuImage;
     private Bitmap bitmap;
+    private String image;
+    private JSONObject restaurant;
+    private int resId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        resId = RestaurantItemMain.getResId();
         setContentView(R.layout.menu_add);
-
-        menuImage = (ImageView) findViewById(R.id.menu_image);
+        menuImage = findViewById(R.id.menu_image);
+        menuNameEdit = findViewById(R.id.menu_name);
+        menuPriceEdit = findViewById(R.id.menu_price);
+        menuDescriptionEdit = findViewById(R.id.menu_description);
+        menuAddButton = findViewById(R.id.menu_add_btn);
+        getRestaurant();
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.
-                setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        "image/*");
+                        setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                "image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
+            }
+        });
+        menuAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postMenuAdd();
             }
         });
     }
@@ -49,95 +75,77 @@ public class Menu_add extends AppCompatActivity {
 
             Uri selectedImageUri = data.getData();
             menuImage.setImageURI(selectedImageUri);
-            BitmapDrawable drawable = (BitmapDrawable)menuImage.getDrawable();
+            BitmapDrawable drawable = (BitmapDrawable) menuImage.getDrawable();
             bitmap = drawable.getBitmap();
-            bitmap = resize(bitmap);
-            String image = bitmapToByteArray(bitmap);
+            bitmap = PhotoSave.resizeMenu(bitmap, getResources());
+            image = PhotoSave.BitmapToString(bitmap);
         }
-    }
-    private Bitmap resize(Bitmap bm){
-        Configuration config = getResources().getConfiguration();
-        if(config.smallestScreenWidthDp>=800)
-            bm = Bitmap.createScaledBitmap(bm, 400, 240, true);
-        else if(config.smallestScreenWidthDp>=600)
-            bm = Bitmap.createScaledBitmap(bm, 300, 180, true);
-        else if(config.smallestScreenWidthDp>=400)
-            bm = Bitmap.createScaledBitmap(bm, 200,  120, true);
-        else if(config.smallestScreenWidthDp>=360)
-            bm = Bitmap.createScaledBitmap(bm, 180, 108, true);
-        else
-            bm = Bitmap.createScaledBitmap(bm, 160, 96, true);
-        return bm;
-    }
-    /**비트맵을 바이너리 바이트배열로 바꾸어주는 메서드 */
-    public String bitmapToByteArray(Bitmap bitmap){
-        String image = "";
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        image = "&image="+byteArrayToBinaryString(byteArray);
-        return image;
-    }
-    /**바이너리 바이트 배열을 스트링으로 바꾸어주는 메서드*/
-    public static String byteArrayToBinaryString(byte[] b){
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < b.length; i++){
-            sb.append(byteToBinaryString(b[i]));
-        }
-        return sb.toString();
-    }
-    /**바이너리 바이트를 스트링으로 바꾸어주는 메서드*/
-    public static String byteToBinaryString(byte n){
-        StringBuilder sb = new StringBuilder("00000000");
-        for(int bit = 0;bit < 8; bit++){
-            if(((n>>bit)&1)>0){
-                sb.setCharAt(7-bit,'1');
-            }
-        }
-        return sb.toString();
     }
 
-    /*
-    // 로그인 POST 요청
-    void login(){
-        String url = "http://125.132.62.150:8000/letseat/login/normal";
+    // 메뉴 등록요청
+    void postMenuAdd() {
+        String url = "http://125.132.62.150:8000/letseat/store/menu/register";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String name = menuNameEdit.getText().toString();
+        String price = menuPriceEdit.getText().toString();
+        String description = menuDescriptionEdit.getText().toString();
         JSONObject postData = new JSONObject();
+        JSONObject resData = new JSONObject();
         try {
-            postData.put("email", email_string);
-            postData.put("password", pwd_string);
+            resData.put("resId", resId);
+            postData.put("restaurant", resData);
+            postData.put("name", name);
+            postData.put("price", Integer.parseInt(price));
+            postData.put("photo", image);
+            postData.put("excription", description);
+            postData.put("resId", restaurant);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest request = new JsonObjectRequest(
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 postData,
                 new Response.Listener<JSONObject>() {
-                    @Override // 응답 잘 받았을 때
+                    @Override
                     public void onResponse(JSONObject response) {
-                        // 자동 로그인 값 넣어주기
-                        SharedPreferences pref                                                                                                                                                                                                                                                                                          = getSharedPreferences("login", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("email", input_email.getText().toString());
-                        editor.putString("pwd", input_password.getText().toString());
-                        editor.commit();
-                        // 화면 전환
-                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        Toast.makeText(getApplicationContext(), "성공적으로 메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), RestaurantItemMain.class);
                         startActivity(intent);
                         finish();
-
                     }
                 },
                 new Response.ErrorListener() {
-                    @Override // 에러 발생 시
+                    @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("error",error.toString());
-                        println("아이디나 비밀번호를 다시 확인해주세요.");
+                        Toast.makeText(getApplicationContext(), "연결 불량.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }*/
+        queue.add(jsonObjectRequest);
+    }
+
+    // 레스토랑 정보 불러오기
+    void getRestaurant() {
+        String url = "http://125.132.62.150:8000/letseat/store/findRestaurantById?resId=" + resId;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject res) {
+                        restaurant = res;
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "연결 불량.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        queue.add(jsonObjectRequest);
+    }
 }

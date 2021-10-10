@@ -12,9 +12,15 @@ public class PhotoSave {
     /**
      * 사진 크기 조정
      */
+    public static Bitmap resizeMenu(Bitmap bm, Resources res) {
+        Configuration config = res.getConfiguration();
+        bm = Bitmap.createScaledBitmap(bm, 200, 200, true);
+        return bm;
+    }
+
     public static Bitmap resize(Bitmap bm, Resources res) {
         Configuration config = res.getConfiguration();
-        bm = Bitmap.createScaledBitmap(bm, 600, 600, true);
+        bm = Bitmap.createScaledBitmap(bm, 500, 500, true);
         return bm;
     }
 

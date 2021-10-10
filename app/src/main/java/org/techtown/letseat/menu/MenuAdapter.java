@@ -61,7 +61,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder>{
         public void setItem(Menu item){
             name.setText(item.getName());
             price.setText(item.getPrice());
-            imageView.setImageResource(item.getResId());
+            imageView.setImageBitmap(item.getBitmap());
         }
     }
 }

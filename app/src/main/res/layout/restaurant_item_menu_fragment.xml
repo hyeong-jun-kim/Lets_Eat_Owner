@@ -8,7 +8,7 @@
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/rest_item_menu_recycler"/>
     </ScrollView>
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -23,6 +23,5 @@
         android:text="메뉴 등록"
         android:backgroundTint="#ED6868"
         app:icon="@drawable/add"
-        app:iconTint="#ffffff"/>
-
+        app:iconTint="@color/white"/>
 </FrameLayout>
