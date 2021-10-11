@@ -1,49 +1,50 @@
 package org.techtown.letseat.waiting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.menu.Menu;
-import org.techtown.letseat.menu.MenuAdapter;
 
 import java.util.ArrayList;
 
-public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.MyViewHolder>{
+public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
 
-    private ArrayList<Waiting> items;
-    private LayoutInflater mInflate;
-    private Context mContext;
-
-    public WaitingAdapter(Context context, ArrayList<Waiting> items) {
-        this.mContext = context;
-        this.mInflate = LayoutInflater.from(context);
-        this.items = items;
-    }
+    private ArrayList<Waiting> items = new ArrayList<>();
+    private Context context;
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public WaitingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.waiting_recycle, parent, false);
+        ViewHolder viewHolder = new ViewHolder(itemView);
+        context = parent.getContext();
 
-        View itemView = mInflate.inflate(R.layout.waiting_recycle, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.waiting_number.setText(items.get(position).waiting_number);
-        holder.name.setText(items.get(position).name);
-        holder.phonenum.setText(items.get(position).phonenum);
-        holder.person_number.setText(items.get(position).person_number);
-        holder.reception_time.setText(items.get(position).reception_time);
+    public void onBindViewHolder(@NonNull WaitingAdapter.ViewHolder viewHolder, int position) {
+
+        Waiting item = items.get(position);
+
+        viewHolder.userImageIv.setImageResource(item.getSrc());
+        viewHolder.dateTv.setText(item.getDate());
+        viewHolder.idTv.setText(item.getId());
+        viewHolder.peopleTv.setText(item.getPeople());
+        viewHolder.waitingnumTv.setText(item.getWaitingnum());
+        viewHolder.phoneNumberTv.setText(item.getPhonenumber());
     }
 
     @Override
@@ -51,33 +52,26 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.MyViewHo
         return items.size();
     }
 
-    public void addItem(Waiting item){
-        items.add(item);
+    public void setItems(ArrayList<Waiting> items) {
+        this.items = items;
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView dateTv, waitingnumTv, idTv, peopleTv,phoneNumberTv;
+        ImageView userImageIv;
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView waiting_number;
-        public TextView name;
-        public TextView phonenum;
-        public TextView person_number;
-        public TextView reception_time;
-
-        public MyViewHolder(@NonNull View itemView){
+        ViewHolder(View itemView) {
             super(itemView);
-            waiting_number = itemView.findViewById(R.id.waiting_number);
-            name = itemView.findViewById(R.id.name);
-            phonenum = itemView.findViewById(R.id.phonenum);
-            person_number = itemView.findViewById(R.id.person_number);
-            reception_time = itemView.findViewById(R.id.reception_time);
-        }
-        public void setItem(Waiting item){
-            waiting_number.setText(item.getWaiting_number());
-            name.setText(item.getName());
-            phonenum.setText(item.getPhonenum());
-            person_number.setText(item.getPerson_number());
-            reception_time.setText(item.getReception_time());
+
+            dateTv = itemView.findViewById(R.id.dateTv);
+            waitingnumTv = itemView.findViewById(R.id.waitingnumTv);
+            idTv = itemView.findViewById(R.id.idTv);
+            peopleTv = itemView.findViewById(R.id.peopleTv);
+            phoneNumberTv = itemView.findViewById(R.id.phoneNumberTv);
+            userImageIv = itemView.findViewById(R.id.userImageIv);
+
         }
     }
 }
+
