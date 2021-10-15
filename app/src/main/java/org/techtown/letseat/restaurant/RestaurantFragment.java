@@ -58,6 +58,8 @@ public class RestaurantFragment extends Fragment {
                 // 액티비티 시작
                 Intent intent = new Intent(getActivity(), RestaurantItemMain.class);
                 RestaurantItemMain.resId = resIdList.get(pos);
+                int rId = resIdList.get(pos);
+                intent.putExtra("send_resId",rId);
                 startActivity(intent);
             }
         });

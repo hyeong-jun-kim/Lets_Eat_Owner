@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".order.orderFrag">
+    tools:context=".order.OrderFrag">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_menu_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF" />
+        android:background="#FFFFFF" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </FrameLayout>

@@ -3,8 +3,10 @@ package org.techtown.letseat.order;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,15 +64,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position){
 
         Orderdata item = Dataset.get(position);
 
-        holder.priceTv.setText(item.getPriceTv());
-        holder.requestTv.setText(item.getRequestTv());
-        holder.menuTv.setText(item.getMenuTv());
-        holder.tablenameTv.setText(item.getTablenameTv());
-        holder.dateTv.setText(item.getDateTv());
+        holder.priceTv.setText(item.getPriceList().toString());
+        holder.requestTv.setText(item.getExcriptionList().toString());
+
+            holder.menuTv.setText(item.getMenu_amount_List().toString());
+            Log.d("ds","ds");
+
+        holder.tablenameTv.setText(item.getTableNumberList().toString());
+        holder.dateTv.setText(item.getOrderTimeList().toString());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
