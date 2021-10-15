@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +39,15 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
 
+import java.io.IOException;
+import java.util.List;
+
 public class RestaurantRegisterActivity extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
     private int aloneAble;
     private String resName, resType, phoneNumber, openTime, intro,
             businessNumber, location, image, ownerId, email;
-
+    private LatLng place;
     private TextView textView;
     private EditText resNameEdit, phoneNumberEdit, openTimeEdit, introEdit, businessNumberEdit, locationEdit;
     private RadioGroup singleMealRadio;
@@ -125,27 +131,50 @@ public class RestaurantRegisterActivity extends AppCompatActivity {
                 intro = introEdit.getText().toString();
                 businessNumber = businessNumberEdit.getText().toString();
                 location = locationEdit.getText().toString();
-                if (singleMealYes.isChecked()) {
-                    aloneAble = 1;
-                } else if (singleMealNo.isChecked()) {
-                    aloneAble = 0;
+                changeLocation();
+                if(place == null){
+                    Toast.makeText(getApplicationContext(),"위치를 다시 입력해주세요.",Toast.LENGTH_LONG).show();
                 }
-                if (resName.isEmpty() || phoneNumber.isEmpty() || openTime.isEmpty() ||
-                        intro.isEmpty() || businessNumber.isEmpty() || location.isEmpty() ||
-                        resType.isEmpty() || (!singleMealNo.isChecked() && !singleMealYes.isChecked()
-                ||restaurant_image == null)) {
-                    Toast.makeText(getApplicationContext(), "빈칸을 채워주시고 다시 시도하시길 바랍니다.", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (businessNumber.length() != 10) {
-                    Toast.makeText(getApplicationContext(), "사업자 등록번호는 '-' 구분선 제외 10자리를 입력해주세요", Toast.LENGTH_SHORT).show();
-                    businessNumberEdit.setText("");
-                    return;
-                } else if (ownerId.isEmpty())
-                    getOwnerId(email);
-                Toast.makeText(getApplicationContext(), "선택되었습니다", Toast.LENGTH_SHORT).show();
-                registerStore();
+                else{
+                    if (singleMealYes.isChecked()) {
+                        aloneAble = 1;
+                    } else if (singleMealNo.isChecked()) {
+                        aloneAble = 0;
+                    }
+                    if (resName.isEmpty() || phoneNumber.isEmpty() || openTime.isEmpty() ||
+                            intro.isEmpty() || businessNumber.isEmpty() || location.isEmpty() ||
+                            resType.isEmpty() || (!singleMealNo.isChecked() && !singleMealYes.isChecked()
+                            ||restaurant_image == null)) {
+                        Toast.makeText(getApplicationContext(), "빈칸을 채워주시고 다시 시도하시길 바랍니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else if (businessNumber.length() != 10) {
+                        Toast.makeText(getApplicationContext(), "사업자 등록번호는 '-' 구분선 제외 10자리를 입력해주세요", Toast.LENGTH_SHORT).show();
+                        businessNumberEdit.setText("");
+                        return;
+                    } else if (ownerId.isEmpty())
+                        getOwnerId(email);
+                    Toast.makeText(getApplicationContext(), "선택되었습니다", Toast.LENGTH_SHORT).show();
+                    registerStore();
+                }
             }
         });
+    }
+
+    //위치 경도로 바꾸기
+    void changeLocation(){
+        Geocoder geocoder = new Geocoder(getBaseContext());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocationName(location, 3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            Address address = addresses.get(0);
+            place = new LatLng(address.getLatitude(), address.getLongitude());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // 사진등록

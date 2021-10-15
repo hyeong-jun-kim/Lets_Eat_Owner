@@ -1,4 +1,4 @@
-package org.techtown.letseat.waiting;
+package org.techtown.letseat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,20 +14,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.techtown.letseat.R;
-
 import java.util.ArrayList;
 
-public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
+public class RestItemReviewAdapter extends RecyclerView.Adapter<RestItemReviewAdapter.ViewHolder> {
 
-    private ArrayList<Waiting> items = new ArrayList<>();
+    private ArrayList<RestItemReviewItem> items = new ArrayList<>();
     private Context context;
 
     @NonNull
     @Override
-    public WaitingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public RestItemReviewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
 
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.waiting_recycle, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.restaurant_item_review_recycler, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         context = parent.getContext();
 
@@ -35,16 +33,13 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WaitingAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RestItemReviewAdapter.ViewHolder viewHolder, int position) {
 
-        Waiting item = items.get(position);
+        RestItemReviewItem item = items.get(position);
 
         viewHolder.userImageIv.setImageResource(item.getSrc());
         viewHolder.dateTv.setText(item.getDate());
         viewHolder.idTv.setText(item.getId());
-        viewHolder.peopleTv.setText(item.getPeople());
-        viewHolder.waitingnumTv.setText(item.getWaitingnum());
-        viewHolder.phoneNumberTv.setText(item.getPhonenumber());
     }
 
     @Override
@@ -52,24 +47,27 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
         return items.size();
     }
 
-    public void setItems(ArrayList<Waiting> items) {
+    public void setItems(ArrayList<RestItemReviewItem> items) {
         this.items = items;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView dateTv, waitingnumTv, idTv, peopleTv,phoneNumberTv;
-        ImageView userImageIv;
+        ImageView userImageIv, reviewImageIv;
+        TextView dateTv,idTv, ratingBarTv,reviewTv;
+        RatingBar ratingBar;
+
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            dateTv = itemView.findViewById(R.id.dateTv);
-            waitingnumTv = itemView.findViewById(R.id.waitingnumTv);
-            idTv = itemView.findViewById(R.id.idTv);
-            peopleTv = itemView.findViewById(R.id.peopleTv);
-            phoneNumberTv = itemView.findViewById(R.id.phoneNumberTv);
             userImageIv = itemView.findViewById(R.id.userImageIv);
+            reviewImageIv = itemView.findViewById(R.id.reviewImageIv);
+            dateTv = itemView.findViewById(R.id.dateTv);
+            idTv = itemView.findViewById(R.id.idTv);
+            reviewTv = itemView.findViewById(R.id.reviewTv);
+            ratingBarTv = itemView.findViewById(R.id.ratingBarTv);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
 
         }
     }

@@ -8,19 +8,21 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.R;
-import org.techtown.letseat.store.Store_Item_info_frag;
 import org.techtown.letseat.util.ViewPagerAdapter;
 
 
 public class RestaurantItemMain extends AppCompatActivity {
-
+    public static int resId;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private Store_Item_info_frag restaurant_Item_Info_Fragment;
+    private RestaurantItemInfoFragment restaurant_Item_Info_Fragment;
     private RestaurantItemMenuFragment restaurant_Item_Menu_fragment;
     private RestaurantItemReviewFragment restaurant_Item_review_fragment;
 
+    public static int getResId() {
+        return resId;
+    }
 
     @Override
     protected void onCreate(Bundle saveBundle) {
@@ -32,7 +34,7 @@ public class RestaurantItemMain extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-        restaurant_Item_Info_Fragment = new Store_Item_info_frag();
+        restaurant_Item_Info_Fragment = new RestaurantItemInfoFragment();
         restaurant_Item_Menu_fragment = new RestaurantItemMenuFragment();
         restaurant_Item_review_fragment = new RestaurantItemReviewFragment();
 
@@ -52,6 +54,5 @@ public class RestaurantItemMain extends AppCompatActivity {
                 super.onTabReselected(tab);
             }
         });
-
     }
 }
