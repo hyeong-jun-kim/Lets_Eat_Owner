@@ -50,7 +50,7 @@ import java.util.ArrayList;
 
 public class OrderFrag extends Fragment {
 
-    int i;
+    int i, q;
     ArrayList<Orderdata> items = new ArrayList<>();
     private String ownerId;
     private int num;
@@ -108,6 +108,7 @@ public class OrderFrag extends Fragment {
                     }
                     notificationManager.notify(1, builder.build());
                     i = 1;
+                    q = 1;
                     items = new ArrayList<>();
                     get_OrderList();
                 }
@@ -203,10 +204,11 @@ public class OrderFrag extends Fragment {
                                     amountlist.add(amount);
                                     Menu_amount_List.add(OrderMenuList.get(p)+amountlist.get(p)+"개\n");
                                 }
-                                Orderdata item = new Orderdata(OrderTimeList.get(i-1), Menu_amount_List,
-                                        TableNumberList.get(i-1), ExcriptionList.get(i-1), PriceList.get(i-1));
+                                Orderdata item = new Orderdata(OrderTimeList.get(q-1), Menu_amount_List,
+                                        TableNumberList.get(q-1), ExcriptionList.get(q-1), PriceList.get(q-1));
                                 items.add(item);
                                 i++;
+                                q++;
                                 get_MenuList(OrderTimeList, TableNumberList, ExcriptionList,PriceList);
 
 
@@ -220,7 +222,9 @@ public class OrderFrag extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.d("에러", error.toString());
+                            i++;
+                            get_MenuList(OrderTimeList, TableNumberList, ExcriptionList,PriceList);
+                            Log.d("에러1", error.toString());
                         }
                     }
             );
