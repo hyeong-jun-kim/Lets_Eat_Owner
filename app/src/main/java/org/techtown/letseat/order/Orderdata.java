@@ -1,52 +1,31 @@
 package org.techtown.letseat.order;
 
+import java.util.ArrayList;
+
 public class Orderdata {
-    private String dateTv, menuTv, tablenameTv, requestTv, priceTv;
 
-    public Orderdata(String dateTv, String menuTv,String tablenameTv, String requestTv, String priceTv){
-        this.dateTv = dateTv;
-        this.menuTv = menuTv;
-        this.tablenameTv = tablenameTv;
-        this.requestTv = requestTv;
-        this.priceTv = priceTv;
-    }
+    ArrayList Menu_amount_List;
+    Object  OrderTimeList, TableNumberList, ExcriptionList, PriceList;
 
-    public String getDateTv() {
-        return dateTv;
-    }
-
-    public String getMenuTv() {
-        return menuTv;
+    public Orderdata(Object OrderTimeList, ArrayList Menu_amount_List , Object TableNumberList,
+                     Object ExcriptionList, Object PriceList){
+        this.OrderTimeList = OrderTimeList;
+        this.Menu_amount_List = Menu_amount_List;
+        this.TableNumberList = TableNumberList;
+        this.ExcriptionList = ExcriptionList;
+        this.PriceList = PriceList;
     }
 
-    public String getTablenameTv() {
-        return tablenameTv;
-    }
 
-    public String getRequestTv() {
-        return requestTv;
-    }
+    public Object getOrderTimeList()  {return OrderTimeList;}
 
-    public String getPriceTv() {
-        return priceTv;
-    }
-    public void setDateTv(String dateTv) {
-        this.dateTv = dateTv;
-    }
+    public ArrayList<String> getMenu_amount_List()  {return Menu_amount_List;}
 
-    public void setMenuTv(String menuTv) {
-        this.menuTv = menuTv;
-    }
 
-    public void setTablenameTv(String tablenameTv) {
-        this.tablenameTv = tablenameTv;
-    }
+    public Object getTableNumberList()  {return TableNumberList;}
 
-    public void setRequestTv(String requestTv) {
-        this.requestTv = requestTv;
-    }
+    public Object getExcriptionList()  {return ExcriptionList;}
 
-    public void setPriceTv(String priceTv) {
-        this.priceTv = priceTv;
-    }
+    public Object getPriceList()  {return PriceList;}
+
 }
