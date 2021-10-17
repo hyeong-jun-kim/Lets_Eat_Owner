@@ -65,7 +65,6 @@ public class OrderFrag extends Fragment {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -87,7 +86,6 @@ public class OrderFrag extends Fragment {
         DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
 
 
-        DatabaseReference conditionRdf = mRoootRef.child("ownerId_"+ownerId);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
