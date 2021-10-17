@@ -278,7 +278,6 @@ public class RestaurantItemInfoFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("error", error.toString());
                     }
-
                 }
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
