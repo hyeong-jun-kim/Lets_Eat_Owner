@@ -1,36 +1,25 @@
 package org.techtown.letseat.order;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
-import static androidx.core.content.ContextCompat.getSystemServiceName;
-import static kr.co.bootpay.Bootpay.finish;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,17 +30,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.R;
-import org.techtown.letseat.restaurant.RestaurantItem;
 import org.techtown.letseat.util.AppHelper;
-import org.techtown.letseat.util.PhotoSave;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class OrderFrag extends Fragment {
 
     int i, q;
-    ArrayList<Orderdata> items = new ArrayList<>();
+    private final ArrayList<OrderData> items = new ArrayList<>();
+    private final ArrayList<Integer> resIdList = new ArrayList<>();
     private String ownerId;
     private int num;
     private RecyclerView recyclerView;
@@ -71,18 +58,19 @@ public class OrderFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.order_fragment,container,false);
-
+        View view = inflater.inflate(R.layout.order_fragment, container, false);
         Bundle bundle = this.getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             ownerId = bundle.getString("ownerId");
-            Log.d("ds","ds");
+            Log.d("ds", "ds");
         }
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.add_menu_recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
+        adapter = new OrderAdapter(items);
+        recyclerView.setAdapter(adapter);
+        getRestaurantList();
         DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
 
 
@@ -108,8 +96,7 @@ public class OrderFrag extends Fragment {
                         notificationManager.notify(1, builder.build());
                         i = 1;
                         q = 1;
-                        items = new ArrayList<>();
-                        get_OrderList();
+                        getWatingOrderList();
                     }
                 }catch(Exception e){
                     myRef.setValue(0);
@@ -124,7 +111,107 @@ public class OrderFrag extends Fragment {
         return view;
     }
 
+    // Owner Id로 레스토랑 리스트 받기
+    void getRestaurantList() {
+        String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId=" + ownerId;
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) response.getJSONObject(i);
+                                int resId = jsonObject.getInt("resId");
+                                resIdList.add(resId);
+                            }
+                            getWatingOrderList();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
+        AppHelper.requestQueue.add(request);
+    }
+
+    // 현재 주문확인 대기중인 주문리스트 받기
+    void getWatingOrderList() {
+        for (int i = 0; i < resIdList.size(); i++) {
+            int resId = resIdList.get(i);
+            String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
+            JsonArrayRequest request = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try {
+                                for (int i = 0; i < response.length(); i++) {
+                                    String menus = "";
+                                    int sum = 0;
+                                    JSONObject jsonObject = (JSONObject) response.get(i);
+                                    ArrayList<String> menuList = new ArrayList<String>();
+                                    String orderTime = jsonObject.getString("orderTime") + " 주문확인 대기중";
+                                    String tableNumber = jsonObject.getString("tableNumber");
+                                    String request = jsonObject.getString("request");
+                                    JSONArray resMenus = jsonObject.getJSONArray("resMenus");
+                                    for (int j = 0; j < resMenus.length(); j++) {
+                                        JSONObject menu = resMenus.getJSONObject(j);
+                                        String menu_name = menu.getString("name");
+                                        int price = menu.getInt("price");
+                                        menuList.add(menu_name);
+                                        sum += price;
+                                    }
+                                    JSONArray orderMenus = jsonObject.getJSONArray("orderMenus");
+                                    for (int j = 0; j < orderMenus.length(); j++) {
+                                        JSONObject orderMenu = orderMenus.getJSONObject(j);
+                                        int amount = orderMenu.getInt("amount");
+                                        if (j == 0) {
+                                            menus = menuList.get(j) + " " + amount + "개";
+                                        } else {
+                                            menus += ", " + menuList.get(j) + " " + amount + "개 ";
+                                        }
+                                    }
+                                    OrderData orderData = new OrderData(orderTime, tableNumber, menus, request, sum + "원 결제");
+                                    items.add(orderData);
+                                }
+                                Log.d("응답", response.toString());
+                            } catch (JSONException e) {
+                                Log.d("예외", e.toString());
+                                e.printStackTrace();
+                            }
+                            start();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("에러", error.toString());
+                        }
+                    }
+            );
+            request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
+            AppHelper.requestQueue.add(request);
+        }
+    }
+
+    public void start() {
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
+    }
+
+/*
     void get_OrderList() {
         String url = "http://125.132.62.150:8000/letseat/order/list/load?resId="+ownerId;
         JSONArray getData = new JSONArray();
@@ -243,7 +330,7 @@ public class OrderFrag extends Fragment {
             adapter.setItems(items);
             adapter.notifyDataSetChanged();
         }
-    }
+    }*/
 
 }
 
