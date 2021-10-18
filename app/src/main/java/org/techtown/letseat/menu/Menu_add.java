@@ -98,19 +98,8 @@ public class Menu_add extends AppCompatActivity {
             if (toast != null) {
                 toast.cancel();
             }
-            if(image == null || name == null || price == null || description == null){
-                if(image == null){
-                    Toast.makeText(getApplicationContext(),"사진을 등록해주세요.",Toast.LENGTH_LONG).show();
-                }
-                if(name == null){
-                    Toast.makeText(getApplicationContext(),"메뉴 이름을 입력해주세요.",Toast.LENGTH_LONG).show();
-                }
-                if(price == null){
-                    Toast.makeText(getApplicationContext(),"메뉴 가격을 입력해주세요.",Toast.LENGTH_LONG).show();
-                }
-                if(description == null){
-                    Toast.makeText(getApplicationContext(),"메뉴 설명을 입력해주세요.",Toast.LENGTH_LONG).show();
-                }
+            if(image == null || name.isEmpty() || price.isEmpty() || description.isEmpty()){
+                Toast.makeText(getApplicationContext(),"빈칸을 입력해주세요.",Toast.LENGTH_SHORT).show();
             }else{
                 try {
                     resData.put("resId", resId);
