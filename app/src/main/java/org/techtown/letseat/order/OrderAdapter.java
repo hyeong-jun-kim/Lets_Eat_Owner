@@ -21,24 +21,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     private Context context;
     private Intent intent;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView priceTv,requestTv, menuTv, tablenameTv, dateTv;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView priceTv, requestTv, menuTv, tablenameTv, dateTv;
         public View view1;
-        public Button okBtn, cancelBtn;
+        public Button okBtn, cancelBtn, completeBtn;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
-            priceTv = (TextView) view.findViewById(R.id.priceTv);
-            requestTv = (TextView) view.findViewById(R.id.requestTv);
-            menuTv = (TextView) view.findViewById(R.id.menuTv);
-            dateTv = (TextView) view.findViewById(R.id.dateTv);
-            tablenameTv = (TextView) view.findViewById(R.id.tablenameTv);
+            okBtn = view.findViewById(R.id.orderCheckBtn);
+            cancelBtn = view.findViewById(R.id.orderCancelBtn);
+            completeBtn = view.findViewById(R.id.completeBtn);
+            priceTv = view.findViewById(R.id.priceTv);
+            requestTv = view.findViewById(R.id.requestTv);
+            menuTv = view.findViewById(R.id.menuTv);
+            dateTv = view.findViewById(R.id.dateTv);
+            tablenameTv = view.findViewById(R.id.tablenameTv);
 
-            view.setOnClickListener(new View.OnClickListener()
-            {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     int pos = getAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         mListener.onItemClick(v, pos);
