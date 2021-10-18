@@ -36,6 +36,8 @@ public class Menu_add extends AppCompatActivity {
     private String image;
     private JSONObject restaurant;
     private int resId;
+    private long sendTime = 0;
+    private static Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,38 +93,59 @@ public class Menu_add extends AppCompatActivity {
         String description = menuDescriptionEdit.getText().toString();
         JSONObject postData = new JSONObject();
         JSONObject resData = new JSONObject();
-        try {
-            resData.put("resId", resId);
-            postData.put("restaurant", resData);
-            postData.put("name", name);
-            postData.put("price", Integer.parseInt(price));
-            postData.put("photo", image);
-            postData.put("excription", description);
-            postData.put("resId", restaurant);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                postData,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplicationContext(), "성공적으로 메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), RestaurantItemMain.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "연결 불량.", Toast.LENGTH_SHORT).show();
-                    }
+        if(System.currentTimeMillis()> sendTime + 2000) {
+            sendTime = System.currentTimeMillis();
+            if (toast != null) {
+                toast.cancel();
+            }
+            if(image == null || name == null || price == null || description == null){
+                if(image == null){
+                    Toast.makeText(getApplicationContext(),"사진을 등록해주세요.",Toast.LENGTH_LONG).show();
                 }
-        );
-        queue.add(jsonObjectRequest);
+                if(name == null){
+                    Toast.makeText(getApplicationContext(),"메뉴 이름을 입력해주세요.",Toast.LENGTH_LONG).show();
+                }
+                if(price == null){
+                    Toast.makeText(getApplicationContext(),"메뉴 가격을 입력해주세요.",Toast.LENGTH_LONG).show();
+                }
+                if(description == null){
+                    Toast.makeText(getApplicationContext(),"메뉴 설명을 입력해주세요.",Toast.LENGTH_LONG).show();
+                }
+            }else{
+                try {
+                    resData.put("resId", resId);
+                    postData.put("restaurant", resData);
+                    postData.put("name", name);
+                    postData.put("price", Integer.parseInt(price));
+                    postData.put("photo", image);
+                    postData.put("excription", description);
+                    postData.put("resId", restaurant);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                        Request.Method.POST,
+                        url,
+                        postData,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Toast.makeText(getApplicationContext(), "성공적으로 메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), RestaurantItemMain.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "연결 불량.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+                queue.add(jsonObjectRequest);
+            }
+        }
     }
 
     // 레스토랑 정보 불러오기
