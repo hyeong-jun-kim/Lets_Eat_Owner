@@ -6,36 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".restaurant.RestaurantFragment">
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#ffffff">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/store_recyclerView"/>
-            </ScrollView>
-        </LinearLayout>
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/store_register_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_gravity="bottom|right"
-            android:fontFamily="@font/notosansbold"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
-            android:text="가게 등록"
-            android:backgroundTint="#ED6868"
-            app:icon="@drawable/add"
-            app:iconTint="@color/white"/>
-    </FrameLayout>
+        android:id="@+id/store_recyclerView"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/store_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        android:fontFamily="@font/notosansbold"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:backgroundTint="#ED6868"
+        app:icon="@drawable/add"
+        app:iconTint="@color/white"/>
 </FrameLayout>
