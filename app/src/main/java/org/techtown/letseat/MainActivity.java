@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
         String ownerId = intent.getStringExtra("ownerId");
 
 
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
 
