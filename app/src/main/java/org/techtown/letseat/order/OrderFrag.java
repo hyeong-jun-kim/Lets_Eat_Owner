@@ -64,7 +64,7 @@ public class OrderFrag extends Fragment {
             ownerId = bundle.getString("ownerId");
             Log.d("ds", "ds");
         }
-        recyclerView = (RecyclerView) view.findViewById(R.id.add_menu_recyclerView);
+        recyclerView = view.findViewById(R.id.add_menu_recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -123,7 +123,7 @@ public class OrderFrag extends Fragment {
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = (JSONObject) response.getJSONObject(i);
+                                JSONObject jsonObject = response.getJSONObject(i);
                                 int resId = jsonObject.getInt("resId");
                                 resIdList.add(resId);
                             }
@@ -146,6 +146,7 @@ public class OrderFrag extends Fragment {
 
     // 현재 주문확인 대기중인 주문리스트 받기
     void getWatingOrderList() {
+
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
@@ -156,12 +157,18 @@ public class OrderFrag extends Fragment {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
+                            recyclerView.removeAllViewsInLayout();
+                            int size = items.size();
+                            items.clear();
+                            recyclerView.setAdapter(adapter);
+                            adapter.notifyItemRangeRemoved(0, size);
                             try {
                                 for (int i = 0; i < response.length(); i++) {
                                     String menus = "";
                                     int sum = 0;
                                     JSONObject jsonObject = (JSONObject) response.get(i);
                                     ArrayList<String> menuList = new ArrayList<String>();
+                                    ArrayList<Integer> menuPrice = new ArrayList<Integer>();
                                     String orderTime = jsonObject.getString("orderTime") + " 주문확인 대기중";
                                     String tableNumber = jsonObject.getString("tableNumber");
                                     String request = jsonObject.getString("request");
@@ -169,14 +176,20 @@ public class OrderFrag extends Fragment {
                                     for (int j = 0; j < resMenus.length(); j++) {
                                         JSONObject menu = resMenus.getJSONObject(j);
                                         String menu_name = menu.getString("name");
-                                        int price = menu.getInt("price");
+                                        int menu_price = menu.getInt("price");
                                         menuList.add(menu_name);
-                                        sum += price;
+                                        menuPrice.add(menu_price);
                                     }
                                     JSONArray orderMenus = jsonObject.getJSONArray("orderMenus");
                                     for (int j = 0; j < orderMenus.length(); j++) {
                                         JSONObject orderMenu = orderMenus.getJSONObject(j);
                                         int amount = orderMenu.getInt("amount");
+                                        int price = menuPrice.get(j);
+                                        if (amount == 1) {
+                                            sum += price;
+                                        } else if (amount >= 2) {
+                                            sum += price * amount;
+                                        }
                                         if (j == 0) {
                                             menus = menuList.get(j) + " " + amount + "개";
                                         } else {
@@ -210,7 +223,6 @@ public class OrderFrag extends Fragment {
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
     }
-
 /*
     void get_OrderList() {
         String url = "http://125.132.62.150:8000/letseat/order/list/load?resId="+ownerId;

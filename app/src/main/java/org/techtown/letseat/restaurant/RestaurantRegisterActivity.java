@@ -56,6 +56,8 @@ public class RestaurantRegisterActivity extends AppCompatActivity {
     private final String[] items = {"한식", "중식", "일식", "양식"};
     private ImageView restaurant_image = null;
     private Bitmap bitmap;
+    private static Toast toast;
+    private long sendTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,29 +134,37 @@ public class RestaurantRegisterActivity extends AppCompatActivity {
                 businessNumber = businessNumberEdit.getText().toString();
                 location = locationEdit.getText().toString();
                 changeLocation();
-                if(place == null){
-                    Toast.makeText(getApplicationContext(),"위치를 다시 입력해주세요.",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    if (singleMealYes.isChecked()) {
-                        aloneAble = 1;
-                    } else if (singleMealNo.isChecked()) {
-                        aloneAble = 0;
+                if(System.currentTimeMillis()> sendTime + 2000)
+                {
+                    sendTime = System.currentTimeMillis();
+                    if(toast != null){
+                        toast.cancel();;
                     }
-                    if (resName.isEmpty() || phoneNumber.isEmpty() || openTime.isEmpty() ||
-                            intro.isEmpty() || businessNumber.isEmpty() || location.isEmpty() ||
-                            resType.isEmpty() || (!singleMealNo.isChecked() && !singleMealYes.isChecked()
-                            ||restaurant_image == null)) {
-                        Toast.makeText(getApplicationContext(), "빈칸을 채워주시고 다시 시도하시길 바랍니다.", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else if (businessNumber.length() != 10) {
-                        Toast.makeText(getApplicationContext(), "사업자 등록번호는 '-' 구분선 제외 10자리를 입력해주세요", Toast.LENGTH_SHORT).show();
-                        businessNumberEdit.setText("");
-                        return;
-                    } else if (ownerId.isEmpty())
-                        getOwnerId(email);
-                    Toast.makeText(getApplicationContext(), "선택되었습니다", Toast.LENGTH_SHORT).show();
-                    registerStore();
+
+                    if(place == null){
+                        Toast.makeText(getApplicationContext(),"위치를 다시 입력해주세요.",Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        if (singleMealYes.isChecked()) {
+                            aloneAble = 1;
+                        } else if (singleMealNo.isChecked()) {
+                            aloneAble = 0;
+                        }
+                        if (resName.isEmpty() || phoneNumber.isEmpty() || openTime.isEmpty() ||
+                                intro.isEmpty() || businessNumber.isEmpty() || location.isEmpty() ||
+                                resType.isEmpty() || (!singleMealNo.isChecked() && !singleMealYes.isChecked()
+                                ||restaurant_image == null)) {
+                            Toast.makeText(getApplicationContext(), "빈칸을 채워주시고 다시 시도하시길 바랍니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (businessNumber.length() != 10) {
+                            Toast.makeText(getApplicationContext(), "사업자 등록번호는 '-' 구분선 제외 10자리를 입력해주세요", Toast.LENGTH_SHORT).show();
+                            businessNumberEdit.setText("");
+                            return;
+                        } else if (ownerId.isEmpty())
+                            getOwnerId(email);
+                        Toast.makeText(getApplicationContext(), "선택되었습니다", Toast.LENGTH_SHORT).show();
+                        registerStore();
+                    }
                 }
             }
         });
