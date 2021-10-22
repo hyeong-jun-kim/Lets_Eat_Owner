@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.order.OrderFrag;
@@ -21,7 +22,7 @@ import org.techtown.letseat.waiting.WaitingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private MaterialToolbar topMain;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        topMain = findViewById(R.id.topMain);
+        setSupportActionBar(topMain);
 
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
