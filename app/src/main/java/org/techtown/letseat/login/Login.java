@@ -21,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.LoginButton;
@@ -31,6 +32,7 @@ import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 
@@ -132,9 +134,7 @@ public class Login extends AppCompatActivity {
                             editor.putString("email", input_email.getText().toString());
                             editor.putString("pwd", input_password.getText().toString());
                             editor.commit();
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            get_ownerId();
                         }
                     },
                     new Response.ErrorListener() {
@@ -148,6 +148,34 @@ public class Login extends AppCompatActivity {
             request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
             AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
             AppHelper.requestQueue.add(request);
+    }
+
+    void get_ownerId(){
+        String url = "http://125.132.62.150:8000/letseat/register/owner/get/id?email="+email_string;
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response) {
+                        String ownerId = response;
+                        Intent intent = new Intent(Login.this, MainActivity.class);
+                        intent.putExtra("ownerId",ownerId);
+                        startActivity(intent);
+                        finish();
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("error",error.toString());
+                        println("아이디나 비밀번호를 다시 확인해주세요.");
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
+        AppHelper.requestQueue = Volley.newRequestQueue(this); // requsetQueue 초기화
+        AppHelper.requestQueue.add(request);
     }
 
     public void kakaoError(String msg){

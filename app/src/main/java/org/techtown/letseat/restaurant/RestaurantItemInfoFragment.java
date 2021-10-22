@@ -30,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,7 +70,7 @@ public class RestaurantItemInfoFragment extends Fragment {
         String email_string = preferences.getString("email", "");
         getOwnerId(email_string);
         // 초기 설정
-        View view = inflater.inflate(R.layout.store_item_info_fragment, container, false);
+        View view = inflater.inflate(R.layout.restaurant_item_info_fragment, container, false);
         singleMealYes = view.findViewById(R.id.info_singlemeal_yes);
         singleMealNo = view.findViewById(R.id.info_singlemeal_no);
         textView = view.findViewById(R.id.info_textView18);
@@ -278,7 +279,6 @@ public class RestaurantItemInfoFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("error", error.toString());
                     }
-
                 }
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌

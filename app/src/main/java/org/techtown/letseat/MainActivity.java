@@ -1,9 +1,11 @@
 package org.techtown.letseat;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
-import org.techtown.letseat.order.orderFrag;
+import org.techtown.letseat.order.OrderFrag;
 import org.techtown.letseat.restaurant.RestaurantFragment;
 import org.techtown.letseat.util.ViewPagerAdapter;
 import org.techtown.letseat.waiting.WaitingFragment;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     private RestaurantFragment RestaurantFragment;
-    private org.techtown.letseat.order.orderFrag orderFrag;
+    private OrderFrag orderFrag;
     private WaitingFragment WaitingFragment;
 
 
@@ -32,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        Intent intent = getIntent();
+        String ownerId = intent.getStringExtra("ownerId");
+
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,8 +51,13 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         RestaurantFragment = new RestaurantFragment();
-        orderFrag = new orderFrag();
+        orderFrag = new OrderFrag();
         WaitingFragment = new WaitingFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("ownerId",ownerId);
+        orderFrag.setArguments(bundle);
+        Log.d("ds","ds");
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
         viewPagerAdapter.addFragment(RestaurantFragment,"가게 관리");

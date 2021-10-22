@@ -1,8 +1,6 @@
 package org.techtown.letseat.order;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,36 +9,39 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
-    private ArrayList<Orderdata> Dataset;
+    private ArrayList<OrderData> items;
     private Context context;
     private Intent intent;
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView priceTv,requestTv, menuTv, tablenameTv, dateTv;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView priceTv, requestTv, menuTv, tablenameTv, dateTv;
         public View view1;
-        public Button okBtn, cancelBtn;
+        public Button okBtn, cancelBtn, completeBtn;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             super(view);
-            priceTv = (TextView) view.findViewById(R.id.priceTv);
-            requestTv = (TextView) view.findViewById(R.id.requestTv);
-            menuTv = (TextView) view.findViewById(R.id.menuTv);
-            dateTv = (TextView) view.findViewById(R.id.dateTv);
-            tablenameTv = (TextView) view.findViewById(R.id.tablenameTv);
+            okBtn = view.findViewById(R.id.orderCheckBtn);
+            cancelBtn = view.findViewById(R.id.orderCancelBtn);
+            completeBtn = view.findViewById(R.id.completeBtn);
+            priceTv = view.findViewById(R.id.priceTv);
+            requestTv = view.findViewById(R.id.requestTv);
+            menuTv = view.findViewById(R.id.menuTv);
+            dateTv = view.findViewById(R.id.dateTv);
+            tablenameTv = view.findViewById(R.id.tablenameTv);
 
-            view.setOnClickListener(new View.OnClickListener()
-            {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION)
-                    {
+                    if (pos != RecyclerView.NO_POSITION) {
                         mListener.onItemClick(v, pos);
                     }
                 }
@@ -48,13 +49,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
         }
     }
 
-    public OrderAdapter(ArrayList<Orderdata> Data){
-        this.Dataset = Data;
+    public OrderAdapter(ArrayList<OrderData> Data) {
+        this.items = Data;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_recycle, parent, false);
         OrderAdapter.ViewHolder viewHolder = new OrderAdapter.ViewHolder(view);
         context = parent.getContext();
@@ -62,19 +63,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Orderdata item = Dataset.get(position);
+        OrderData item = items.get(position);
 
-        holder.priceTv.setText(item.getPriceTv());
-        holder.requestTv.setText(item.getRequestTv());
-        holder.menuTv.setText(item.getMenuTv());
-        holder.tablenameTv.setText(item.getTablenameTv());
-        holder.dateTv.setText(item.getDateTv());
+        holder.priceTv.setText(item.getPrice());
+        holder.requestTv.setText(item.getRequest());
+        holder.menuTv.setText(item.getMenu());
+        holder.tablenameTv.setText(item.getTableNumber());
+        holder.dateTv.setText(item.getDate());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 intent = new Intent(view.getContext(), ItemActivity.class);
                 intent.putExtra("number", position);
                 view.getContext().startActivity(intent);
@@ -88,16 +89,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
     private OrderAdapter.OnItemClickListener mListener = null;
 
-    public void setOnItemClickListener(OrderAdapter.OnItemClickListener listener)
-    {
+    public void setOnItemClickListener(OrderAdapter.OnItemClickListener listener) {
         this.mListener = listener;
     }
+
     @Override
-    public int getItemCount(){
-        return Dataset.size();
+    public int getItemCount() {
+        return items.size();
     }
 
-    public void setItems(ArrayList<Orderdata> items) {
-        this.Dataset = items;
+    public void setItems(ArrayList<OrderData> items) {
+        this.items = items;
     }
 }
