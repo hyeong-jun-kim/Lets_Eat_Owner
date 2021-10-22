@@ -13,7 +13,6 @@ public class OrderData {
         this.price = price;
     }
 
-
     public String getDate() {
         return date;
     }
@@ -21,7 +20,6 @@ public class OrderData {
     public String getTableNumber() {
         return tableNumber;
     }
-
 
     public String getMenu() {
         return menu;
@@ -34,5 +32,4 @@ public class OrderData {
     public String getPrice() {
         return price;
     }
-
 }

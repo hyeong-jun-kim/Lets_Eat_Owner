@@ -53,7 +53,7 @@ import org.techtown.letseat.util.AppHelper;
                     finish();
                 }
             }
-        }, 50);
+        }, 0);
     }
 
     // 로그인 POST 요청
