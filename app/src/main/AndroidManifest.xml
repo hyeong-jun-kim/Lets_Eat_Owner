@@ -39,6 +39,7 @@
             android:exported="true" />
         <activity
             android:name=".restaurant.RestaurantItemMain"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true"/>
 
         <meta-data
@@ -48,7 +49,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
         <activity android:name=".kakao_pay.KaKaoPay" />
         <activity android:name=".kakao_pay.KakaoPayTest" />
         <activity android:name=".menu.menu_sample" />

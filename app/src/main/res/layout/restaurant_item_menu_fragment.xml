@@ -3,14 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rest_item_menu_recycler"/>
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:id="@+id/rest_item_menu_recycler"/>
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/menu_register_button"
         android:layout_width="wrap_content"
@@ -20,7 +16,6 @@
         android:fontFamily="@font/notosansbold"
         android:textColor="#ffffff"
         android:textSize="15dp"
-        android:text="메뉴 등록"
         android:backgroundTint="#ED6868"
         app:icon="@drawable/add"
         app:iconTint="@color/white"/>
