@@ -35,14 +35,14 @@ import org.techtown.letseat.util.AppHelper;
 import java.util.ArrayList;
 
 public class OrderFrag extends Fragment {
-
     int i, q;
     private final ArrayList<OrderData> items = new ArrayList<>();
-    private final ArrayList<Integer> resIdList = new ArrayList<>();
+    public static ArrayList<Integer> resIdList = new ArrayList<>();
+    public static OrderAdapter adapter;
     private String ownerId;
     private int num;
     private RecyclerView recyclerView;
-    private OrderAdapter adapter;
+
     private RecyclerView.LayoutManager layoutManager;
 
     JSONObject jso = new JSONObject();
@@ -146,7 +146,6 @@ public class OrderFrag extends Fragment {
 
     // 현재 주문확인 대기중인 주문리스트 받기
     void getWatingOrderList() {
-
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
@@ -223,126 +222,4 @@ public class OrderFrag extends Fragment {
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
     }
-/*
-    void get_OrderList() {
-        String url = "http://125.132.62.150:8000/letseat/order/list/load?resId="+ownerId;
-        JSONArray getData = new JSONArray();
-        JsonArrayRequest request = new JsonArrayRequest(
-                Request.Method.GET,
-                url,
-                getData,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            String orderTime, tableNumber,excription,price;
-
-                            ArrayList<String> OrderTimeList = new ArrayList<>();
-                            ArrayList<String> TableNumberList = new ArrayList<>();
-                            ArrayList<String> ExcriptionList = new ArrayList<>();
-                            ArrayList<String> PriceList = new ArrayList<>();
-
-                            for(int i = 0; i<response.length(); i++){
-                                JSONObject jsonObject = (JSONObject) response.get(i);
-                                // 데이터 정보
-                                orderTime = jsonObject.getString("orderTime");
-                                tableNumber = jsonObject.getString("tableNumber");
-                                excription = jsonObject.getString("request");
-                                price = jsonObject.getString("sum");
-                                OrderTimeList.add(orderTime);
-                                TableNumberList.add(tableNumber);
-                                ExcriptionList.add(excription);
-                                PriceList.add(price);
-                            }
-                            get_MenuList(OrderTimeList, TableNumberList, ExcriptionList,PriceList);
-
-
-                        } catch (JSONException e) {
-                            Log.d("예외", e.toString());
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("에러", error.toString());
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
-
-    void get_MenuList(ArrayList OrderTimeList, ArrayList TableNumberList, ArrayList ExcriptionList, ArrayList PriceList){
-
-        if(i<=num){
-            String url = "http://125.132.62.150:8000/letseat/order/menu/load?orderId="+i;
-            JSONArray getData = new JSONArray();
-            JsonArrayRequest request = new JsonArrayRequest(
-                    Request.Method.GET,
-                    url,
-                    getData,
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            try {
-                                ArrayList<String> Menu_amount_List = new ArrayList<>();
-                                ArrayList<String> OrderMenuList = new ArrayList<>();
-                                ArrayList<String> amountlist = new ArrayList<>();
-
-                                String OrderMenu;
-                                String amount;
-                                for(int p = 0; p <response.length(); p++){
-                                    JSONObject jsonObject = (JSONObject) response.get(p);
-
-                                    amount = jsonObject.getString("amount");
-                                    jso = jsonObject.getJSONObject("resMenu");
-                                    OrderMenu = jso.getString("name");
-
-                                    OrderMenuList.add(OrderMenu);
-                                    amountlist.add(amount);
-                                    Menu_amount_List.add(OrderMenuList.get(p)+amountlist.get(p)+"개\n");
-                                }
-                                Orderdata item = new Orderdata(OrderTimeList.get(q-1), Menu_amount_List,
-                                        TableNumberList.get(q-1), ExcriptionList.get(q-1), PriceList.get(q-1));
-                                items.add(item);
-                                i++;
-                                q++;
-                                get_MenuList(OrderTimeList, TableNumberList, ExcriptionList,PriceList);
-
-
-                                Log.d("응답1", response.toString());
-                            } catch (JSONException e) {
-                                Log.d("예외1", e.toString());
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            i++;
-                            get_MenuList(OrderTimeList, TableNumberList, ExcriptionList,PriceList);
-                            Log.d("에러1", error.toString());
-                        }
-                    }
-            );
-            request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-            AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
-            AppHelper.requestQueue.add(request);
-        }
-        else{
-            ArrayList<Orderdata> list = new ArrayList<>();
-            adapter = new OrderAdapter(list);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
-            adapter.setItems(items);
-            adapter.notifyDataSetChanged();
-        }
-    }*/
-
 }
-
