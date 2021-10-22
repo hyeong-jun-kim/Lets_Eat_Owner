@@ -124,7 +124,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
         AppHelper.requestQueue.add(request);
     }
-
     public void getOrderList(int resId, int tableNum) {
         String url = "http://125.132.62.150:8000/letseat/order/list/find/orderList?resId=" + resId + "&tableNum=" + tableNum;
         StringRequest request = new StringRequest(
