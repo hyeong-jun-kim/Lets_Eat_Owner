@@ -1,196 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/order_item_text1"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#FF6F61"
-        android:gravity="center"
-        android:text="주 문 내 역"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp" />
-
-    <LinearLayout
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="#ffffff"
+                app:navigationIcon="@drawable/back"
+                app:navigationIconTint="#ED6868"
+                android:background="#ffffff"
+                app:menu="@menu/main">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#ED6868"
+                    android:textSize="20dp"
+                    android:text="주문 내역"/>
+            </com.google.android.material.appbar.MaterialToolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
-
-        <TextView
-            android:id="@+id/order_item_text2"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/textview_edge"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="주문일시"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/order_item_text3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="20dp"
-            android:text="2021-09-28-22:23"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/order_item_text4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="테이블 번호"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-
-        <TextView
-            android:id="@+id/order_item_text5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="20dp"
-            android:text="1번 테이블"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:id="@+id/order_item_text6"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="주문메뉴"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp"
+            android:layout_margin="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="주문 정보"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray" />
 
-        <TextView
-            android:id="@+id/order_item_text7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:text="마라탕 1인분, 해물탕 1인분"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp">
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/order_item_text2"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:text="주문일시"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp">
+                    <TextView
+                        android:id="@+id/order_item_text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="20dp"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:text="2021-09-28-22:23"
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/order_item_text8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="요청사항"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
 
-        <TextView
-            android:id="@+id/order_item_text9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:text="보통맛으로 해주세요"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/order_item_text4"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="테이블 번호"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+                    <TextView
+                        android:id="@+id/order_item_text5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:paddingLeft="20dp"
+                        android:text="1번 테이블"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/order_item_text10"
-            android:layout_width="108dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="금액"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/darker_gray" />
 
-        <TextView
-            android:id="@+id/order_item_text11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="20dp"
-            android:text="20,000원"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/order_item_text6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="주문메뉴"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/order_item_text7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:text="마라탕 1인분, 해물탕 1인분"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+                </LinearLayout>
 
-        <TextView
-            android:id="@+id/order_item_text12"
-            android:layout_width="108dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:text="결제방식"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@android:color/darker_gray" />
 
-        <TextView
-            android:id="@+id/order_item_text13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="20dp"
-            android:text="카카오페이 결제완료"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:background="@drawable/textview_edge"/>
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/order_item_text8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="요청사항"
+                        android:fontFamily="@font/notosansbold"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/order_item_text9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:paddingTop="10dp"
+                        android:text="보통맛으로 해주세요"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/darker_gray" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="결제 정보"
+                    android:fontFamily="@font/notosansbold"
+                    android:includeFontPadding="false"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/order_item_text10"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="금액"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/order_item_text11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="20dp"
+                        android:text="20,000원"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:id="@+id/order_item_text12"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="결제방식"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/order_item_text13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="20dp"
+                        android:fontFamily="@font/notosansregular"
+                        android:includeFontPadding="false"
+                        android:text="카카오페이 결제완료"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

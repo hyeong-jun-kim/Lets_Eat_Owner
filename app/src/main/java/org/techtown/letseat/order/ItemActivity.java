@@ -10,7 +10,7 @@ import org.techtown.letseat.R;
 
 public class ItemActivity extends AppCompatActivity{
     private Intent intent;
-    private TextView textView1, textView2, textView3, textView4, textView5, textView6, textView7, textView8, textView9, textView10, textView11, textView12, textView13;
+    private TextView textView2, textView3, textView4, textView5, textView6, textView7, textView8, textView9, textView10, textView11, textView12, textView13;
     private int number;
 
 
@@ -21,7 +21,6 @@ public class ItemActivity extends AppCompatActivity{
         intent = getIntent();
         number = intent.getIntExtra("number", -1);
 
-        textView1 = findViewById(R.id.order_item_text1);
         textView2 = findViewById(R.id.order_item_text2);
         textView3 = findViewById(R.id.order_item_text3);
         textView4 = findViewById(R.id.order_item_text4);
