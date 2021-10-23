@@ -44,7 +44,16 @@ public class OrderFrag extends Fragment {
     private RecyclerView recyclerView;
 
     private RecyclerView.LayoutManager layoutManager;
-    DatabaseReference mRoootRef = FirebaseDatabase.getInstance().getReference();
+
+    JSONObject jso = new JSONObject();
+
+    ArrayList<String> MenuNameList = new ArrayList<>();
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,28 +71,35 @@ public class OrderFrag extends Fragment {
         adapter = new OrderAdapter(items);
         recyclerView.setAdapter(adapter);
         getRestaurantList();
-        DatabaseReference conditionRdf = mRoootRef.child("ownerId_" + ownerId);
-        conditionRdf.addValueEventListener(new ValueEventListener() {
+        DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
+
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 데이터 값이 변했을 때마다 작동, text 안에 받아온 데이터 문자열을 넣어줌
-                num = dataSnapshot.getValue(Integer.class);
-                if (num != 0) {
-                    //푸쉬알림
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
+                try{
+                    num = dataSnapshot.getValue(Integer.class);
+                    if(num != 0){
+                        //푸쉬알림
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
 
-                    builder.setSmallIcon(R.mipmap.ic_launcher);
-                    builder.setContentTitle("주문");
-                    builder.setContentText("새로운 주문이 들어왔습니다.");
+                        builder.setSmallIcon(R.mipmap.ic_launcher);
+                        builder.setContentTitle("주문");
+                        builder.setContentText("새로운 주문이 들어왔습니다.");
 
-                    NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+                        }
+                        notificationManager.notify(1, builder.build());
+                        i = 1;
+                        q = 1;
+                        getWatingOrderList();
                     }
-                    notificationManager.notify(1, builder.build());
-                    i = 1;
-                    q = 1;
-                    getWatingOrderList();
+                }catch(Exception e){
+                    myRef.setValue(0);
                 }
             }
 
