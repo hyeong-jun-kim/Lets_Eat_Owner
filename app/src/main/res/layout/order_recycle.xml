@@ -86,16 +86,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:orientation="horizontal">
+
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/orderCheckBtn"
+                    style="?attr/materialButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="주문 접수"
-                    android:id="@+id/orderCheckBtn"
                     android:fontFamily="@font/notosansregular"
+                    android:text="주문 접수"
                     app:backgroundTint="#ED6868"
-                    app:cornerRadius="15dp"
-                    style="?attr/materialButtonStyle"/>
+                    app:cornerRadius="15dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/orderCancelBtn"

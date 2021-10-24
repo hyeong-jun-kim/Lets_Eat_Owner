@@ -3,6 +3,8 @@ package org.techtown.letseat.order;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,20 +14,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
+
+    String OrderCheck;
     private ArrayList<OrderData> items;
     private Context context;
     private Intent intent;
@@ -68,7 +80,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+
         OrderData item = items.get(position);
+        OrderCheck = item.getOrderCheck();
+        if(OrderCheck.equals("N")){
+            holder.okBtn.setBackgroundColor(Color.parseColor("#000000"));
+            holder.okBtn.setText("접수 완료");
+        }
         holder.priceTv.setText(item.getPrice());
         holder.requestTv.setText(item.getRequest());
         holder.menuTv.setText(item.getMenu());
@@ -97,6 +116,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    @Override
+    public int getItemViewType(int position){
+        return position;
     }
 
     public void setItems(ArrayList<OrderData> items) {
@@ -151,6 +175,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public HashMap<Integer, Integer> orderMap = new HashMap<>();
         public TextView priceTv, requestTv, menuTv, tablenameTv, dateTv;
         public View view1;
@@ -185,11 +210,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         String tableNumber = items.get(pos).tableNumber;
                         getOrderList(OrderFrag.resIdList.get(0), Integer.parseInt(tableNumber));
                         orderMap.put(pos, 1);
-                        okBtn.setBackgroundColor(000000);
+                        okBtn.setBackgroundColor(Color.parseColor("#000000"));
                         okBtn.setText("접수 완료");
                         //dateTv = v.findViewById(R.id.dateTv);
                         String text = dateTv.getText().toString();
-                        text = text.replace("주문확인", "서빙");
                         dateTv.setText(text);
                         Toast.makeText(context, "주문 접수가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -215,4 +239,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             });
         }
     }
+
+
 }
