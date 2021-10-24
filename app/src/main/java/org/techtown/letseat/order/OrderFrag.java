@@ -42,19 +42,10 @@ public class OrderFrag extends Fragment {
     private String ownerId;
     private int num;
     private RecyclerView recyclerView;
-
     private RecyclerView.LayoutManager layoutManager;
-
     JSONObject jso = new JSONObject();
-
     ArrayList<String> MenuNameList = new ArrayList<>();
-
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,9 +63,6 @@ public class OrderFrag extends Fragment {
         recyclerView.setAdapter(adapter);
         getRestaurantList();
         DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
-
-
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -84,11 +72,9 @@ public class OrderFrag extends Fragment {
                     if(num != 0){
                         //푸쉬알림
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
-
                         builder.setSmallIcon(R.mipmap.ic_launcher);
                         builder.setContentTitle("주문");
                         builder.setContentText("새로운 주문이 들어왔습니다.");
-
                         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
@@ -110,7 +96,6 @@ public class OrderFrag extends Fragment {
         });
         return view;
     }
-
     // Owner Id로 레스토랑 리스트 받기
     void getRestaurantList() {
         String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId=" + ownerId;
@@ -143,11 +128,11 @@ public class OrderFrag extends Fragment {
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
         AppHelper.requestQueue.add(request);
     }
-
     // 현재 주문확인 대기중인 주문리스트 받기
     void getWatingOrderList() {
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
+            recyclerView.removeAllViewsInLayout();
             String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,
@@ -156,7 +141,6 @@ public class OrderFrag extends Fragment {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
-                            recyclerView.removeAllViewsInLayout();
                             int size = items.size();
                             items.clear();
                             recyclerView.setAdapter(adapter);
@@ -173,10 +157,8 @@ public class OrderFrag extends Fragment {
                                     String request = jsonObject.getString("request");
                                     String orderCheck = jsonObject.getString("checkYN");
                                     String servingCheck = jsonObject.getString("servingYN");
+                                    int orderId = jsonObject.getInt("orderId");
                                     JSONArray resMenus = jsonObject.getJSONArray("resMenus");
-
-
-
                                         for (int j = 0; j < resMenus.length(); j++) {
                                             JSONObject menu = resMenus.getJSONObject(j);
                                             String menu_name = menu.getString("name");
@@ -200,12 +182,12 @@ public class OrderFrag extends Fragment {
                                                 menus += ", " + menuList.get(j) + " " + amount + "개 ";
                                             }
                                         }
-                                        if(servingCheck.equals("null")){
-                                            OrderData orderData = new OrderData(orderTime, tableNumber, menus, request, sum + "원 결제",orderCheck);
-                                            items.add(orderData);
-                                        }else {
-                                            Log.d("응답", response.toString());
-                                        }
+                                    if (servingCheck.equals("N")) {
+                                        OrderData orderData = new OrderData(orderTime, tableNumber, menus, request, sum + "원 결제", orderCheck, orderId);
+                                        items.add(orderData);
+                                    } else {
+                                        Log.d("응답", response.toString());
+                                    }
                                 }
                             } catch (JSONException e) {
                                 Log.d("예외", e.toString());
@@ -225,7 +207,6 @@ public class OrderFrag extends Fragment {
             AppHelper.requestQueue.add(request);
         }
     }
-
     public void start() {
         adapter.setItems(items);
         adapter.notifyDataSetChanged();

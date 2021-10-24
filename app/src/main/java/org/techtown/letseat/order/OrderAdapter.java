@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,9 +32,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     private ArrayList<OrderData> items;
     private Context context;
     private Intent intent;
-    private int orderId;
 
-    public void setServingOrder() {
+    public void setServingOrder(int orderId) {
         String url = "http://125.132.62.150:8000/letseat/order/serving?orderId=" + orderId;
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -80,11 +70,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
-
         OrderData item = items.get(position);
         OrderCheck = item.getOrderCheck();
-        if(OrderCheck.equals("N")){
+        if (OrderCheck.equals("Y")) {
             holder.okBtn.setBackgroundColor(Color.parseColor("#000000"));
             holder.okBtn.setText("접수 완료");
         }
@@ -127,7 +115,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         this.items = items;
     }
 
-    public void setCheckOrder() {
+    public void setCheckOrder(int orderId) {
         String url = "http://125.132.62.150:8000/letseat/order/check?orderId=" + orderId;
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -148,7 +136,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
         AppHelper.requestQueue.add(request);
     }
-    public void getOrderList(int resId, int tableNum) {
+    /*public void getOrderList(int resId, int tableNum) {
         String url = "http://125.132.62.150:8000/letseat/order/list/find/orderList?resId=" + resId + "&tableNum=" + tableNum;
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -159,7 +147,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         if (response != null) {
                             orderId = Integer.parseInt(response);
                         }
-                        setCheckOrder();
                     }
                 },
                 new Response.ErrorListener() {
@@ -171,7 +158,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         );
         request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
         AppHelper.requestQueue.add(request);
-    }
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -207,8 +194,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     int pos = getAdapterPosition();
                     if (!orderMap.containsKey(pos)) {
                         String tableNumber = items.get(pos).tableNumber;
-                        getOrderList(OrderFrag.resIdList.get(0), Integer.parseInt(tableNumber));
+                        //getOrderList(OrderFrag.resIdList.get(pos), Integer.parseInt(tableNumber));
                         orderMap.put(pos, 1);
+                        setCheckOrder(items.get(pos).orderId);
                         okBtn.setBackgroundColor(Color.parseColor("#000000"));
                         okBtn.setText("접수 완료");
                         //dateTv = v.findViewById(R.id.dateTv);
@@ -226,10 +214,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     int pos = getAdapterPosition();
                     if (orderMap.containsKey(pos)) {
                         String tableNumber = items.get(pos).tableNumber;
-                        getOrderList(OrderFrag.resIdList.get(0), Integer.parseInt(tableNumber));
+                        setServingOrder(items.get(pos).orderId);
                         OrderFrag.adapter.notifyItemRemoved(pos);
                         orderMap.remove(pos);
-                        setServingOrder();
+                        items.remove(pos);
+                        OrderFrag.resIdList.remove(pos);
                         Toast.makeText(context, "서빙이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "서빙버튼을 누르기전 주문확인 버튼을 눌러주시기 바랍니다.", Toast.LENGTH_SHORT).show();

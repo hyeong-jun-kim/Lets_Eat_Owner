@@ -9,7 +9,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -39,12 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String ownerId = intent.getStringExtra("ownerId");
-
-
-
-        topMain = findViewById(R.id.topMain);
-        setSupportActionBar(topMain);
-
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
 
