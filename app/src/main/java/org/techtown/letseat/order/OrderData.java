@@ -2,15 +2,16 @@ package org.techtown.letseat.order;
 
 public class OrderData {
 
-    String date, tableNumber, menu, request, price;
+    String date, tableNumber, menu, request, price, orderCheck;
 
     public OrderData(String date, String tableNumber, String menu, String request,
-                     String price) {
+                     String price, String orderCheck) {
         this.date = date;
         this.tableNumber = tableNumber;
         this.menu = menu;
         this.request = request;
         this.price = price;
+        this.orderCheck = orderCheck;
     }
 
     public String getDate() {
@@ -31,5 +32,9 @@ public class OrderData {
 
     public String getPrice() {
         return price;
+    }
+
+    public String getOrderCheck() {
+        return orderCheck;
     }
 }

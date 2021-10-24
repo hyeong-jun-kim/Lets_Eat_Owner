@@ -168,37 +168,45 @@ public class OrderFrag extends Fragment {
                                     JSONObject jsonObject = (JSONObject) response.get(i);
                                     ArrayList<String> menuList = new ArrayList<String>();
                                     ArrayList<Integer> menuPrice = new ArrayList<Integer>();
-                                    String orderTime = jsonObject.getString("orderTime") + " 주문확인 대기중";
+                                    String orderTime = jsonObject.getString("orderTime");
                                     String tableNumber = jsonObject.getString("tableNumber");
                                     String request = jsonObject.getString("request");
+                                    String orderCheck = jsonObject.getString("checkYN");
+                                    String servingCheck = jsonObject.getString("servingYN");
                                     JSONArray resMenus = jsonObject.getJSONArray("resMenus");
-                                    for (int j = 0; j < resMenus.length(); j++) {
-                                        JSONObject menu = resMenus.getJSONObject(j);
-                                        String menu_name = menu.getString("name");
-                                        int menu_price = menu.getInt("price");
-                                        menuList.add(menu_name);
-                                        menuPrice.add(menu_price);
-                                    }
-                                    JSONArray orderMenus = jsonObject.getJSONArray("orderMenus");
-                                    for (int j = 0; j < orderMenus.length(); j++) {
-                                        JSONObject orderMenu = orderMenus.getJSONObject(j);
-                                        int amount = orderMenu.getInt("amount");
-                                        int price = menuPrice.get(j);
-                                        if (amount == 1) {
-                                            sum += price;
-                                        } else if (amount >= 2) {
-                                            sum += price * amount;
+
+
+
+                                        for (int j = 0; j < resMenus.length(); j++) {
+                                            JSONObject menu = resMenus.getJSONObject(j);
+                                            String menu_name = menu.getString("name");
+                                            int menu_price = menu.getInt("price");
+                                            menuList.add(menu_name);
+                                            menuPrice.add(menu_price);
                                         }
-                                        if (j == 0) {
-                                            menus = menuList.get(j) + " " + amount + "개";
-                                        } else {
-                                            menus += ", " + menuList.get(j) + " " + amount + "개 ";
+                                        JSONArray orderMenus = jsonObject.getJSONArray("orderMenus");
+                                        for (int j = 0; j < orderMenus.length(); j++) {
+                                            JSONObject orderMenu = orderMenus.getJSONObject(j);
+                                            int amount = orderMenu.getInt("amount");
+                                            int price = menuPrice.get(j);
+                                            if (amount == 1) {
+                                                sum += price;
+                                            } else if (amount >= 2) {
+                                                sum += price * amount;
+                                            }
+                                            if (j == 0) {
+                                                menus = menuList.get(j) + " " + amount + "개";
+                                            } else {
+                                                menus += ", " + menuList.get(j) + " " + amount + "개 ";
+                                            }
                                         }
-                                    }
-                                    OrderData orderData = new OrderData(orderTime, tableNumber, menus, request, sum + "원 결제");
-                                    items.add(orderData);
+                                        if(servingCheck.equals("null")){
+                                            OrderData orderData = new OrderData(orderTime, tableNumber, menus, request, sum + "원 결제",orderCheck);
+                                            items.add(orderData);
+                                        }else {
+                                            Log.d("응답", response.toString());
+                                        }
                                 }
-                                Log.d("응답", response.toString());
                             } catch (JSONException e) {
                                 Log.d("예외", e.toString());
                                 e.printStackTrace();
