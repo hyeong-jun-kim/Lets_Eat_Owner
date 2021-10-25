@@ -6,9 +6,6 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
-import org.techtown.letseat.login.Login;
 import org.techtown.letseat.order.OrderFrag;
 import org.techtown.letseat.restaurant.RestaurantFragment;
 import org.techtown.letseat.util.ViewPagerAdapter;
@@ -45,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String ownerId = intent.getStringExtra("ownerId");
 
-        Button kakao_logout_button = findViewById(R.id.button);
+        /*Button kakao_logout_button = findViewById(R.id.button);
         kakao_logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,10 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
-
-        topMain = findViewById(R.id.topMain);
-        setSupportActionBar(topMain);
+        });*/
 
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
