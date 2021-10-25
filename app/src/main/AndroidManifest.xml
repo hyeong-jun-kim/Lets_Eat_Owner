@@ -28,6 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEat"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Kakao_Login_userInfo"/>
         <activity
             android:name=".menu.Menu_add"
             android:exported="true" />
