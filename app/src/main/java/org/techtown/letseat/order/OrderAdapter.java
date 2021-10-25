@@ -218,7 +218,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                         OrderFrag.adapter.notifyItemRemoved(pos);
                         orderMap.remove(pos);
                         items.remove(pos);
-                        OrderFrag.resIdList.remove(pos);
                         Toast.makeText(context, "서빙이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "서빙버튼을 누르기전 주문확인 버튼을 눌러주시기 바랍니다.", Toast.LENGTH_SHORT).show();
