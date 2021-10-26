@@ -1,18 +1,19 @@
 package org.techtown.letseat.order;
 
 public class OrderData {
-
-    String date, tableNumber, menu, request, price;
+    int orderId;
+    String date, tableNumber, menu, request, price, orderCheck;
 
     public OrderData(String date, String tableNumber, String menu, String request,
-                     String price) {
+                     String price, String orderCheck, int orderId) {
         this.date = date;
         this.tableNumber = tableNumber;
         this.menu = menu;
         this.request = request;
         this.price = price;
+        this.orderCheck = orderCheck;
+        this.orderId = orderId;
     }
-
 
     public String getDate() {
         return date;
@@ -21,7 +22,6 @@ public class OrderData {
     public String getTableNumber() {
         return tableNumber;
     }
-
 
     public String getMenu() {
         return menu;
@@ -35,4 +35,11 @@ public class OrderData {
         return price;
     }
 
+    public String getOrderCheck() {
+        return orderCheck;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
 }
