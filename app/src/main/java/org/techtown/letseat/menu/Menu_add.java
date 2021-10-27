@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +51,14 @@ public class Menu_add extends AppCompatActivity {
         menuDescriptionEdit = findViewById(R.id.menu_description);
         menuAddButton = findViewById(R.id.menu_add_btn);
         getRestaurant();
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

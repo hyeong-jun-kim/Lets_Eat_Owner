@@ -30,6 +30,18 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Kakao_Login_userInfo"/>
         <activity
+            android:name=".MyTab"
+            android:exported="true" />
+        <activity
+            android:name=".passwordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".idActivity"
+            android:exported="true" />
+        <activity
+            android:name=".information_fix"
+            android:exported="true" />
+        <activity
             android:name=".menu.Menu_add"
             android:exported="true" />
         <activity

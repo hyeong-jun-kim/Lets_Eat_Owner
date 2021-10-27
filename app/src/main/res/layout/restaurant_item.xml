@@ -19,7 +19,8 @@
                 app:navigationIcon="@drawable/back"
                 app:navigationIconTint="#ED6868"
                 android:background="#ffffff"
-                app:menu="@menu/main">
+                app:menu="@menu/main"
+                android:id="@+id/topMain">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

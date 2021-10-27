@@ -1,10 +1,12 @@
 package org.techtown.letseat.restaurant;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.techtown.letseat.R;
@@ -28,6 +30,14 @@ public class RestaurantItemMain extends AppCompatActivity {
     protected void onCreate(Bundle saveBundle) {
         super.onCreate(saveBundle);
         setContentView(R.layout.restaurant_item);
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         viewPager = findViewById(R.id.view_pager);
         viewPager.setOffscreenPageLimit(3);
 

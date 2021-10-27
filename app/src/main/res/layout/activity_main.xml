@@ -17,11 +17,10 @@
                 android:id="@+id/topMain"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/navi"
+                app:navigationIcon="@drawable/person"
                 app:navigationIconTint="#ED6868"
                 android:backgroundTint="#ffffff"
-                android:background="#ffffff"
-                app:menu="@menu/main">
+                android:background="#ffffff">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
