@@ -30,6 +30,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,6 +79,14 @@ public class RestaurantRegisterActivity extends AppCompatActivity {
         sendBtn = findViewById(R.id.store_register_btn);
         restaurant_image = (ImageView) findViewById(R.id.restaurant_image);
 
+        MaterialToolbar toolbar = findViewById(R.id.topMain);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         /** OwnerId 가져오기 */
         SharedPreferences sp = getSharedPreferences("login",MODE_PRIVATE);
         email = sp.getString("email","");
