@@ -1,40 +1,123 @@
 package org.techtown.letseat.waiting;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
-import org.techtown.letseat.RestItemReviewAdapter;
-import org.techtown.letseat.RestItemReviewData;
+import org.techtown.letseat.util.AppHelper;
 
 import java.util.ArrayList;
 
 
 public class WaitingFragment extends Fragment {
-
     View view;
-    private WaitingAdapter adapter = new WaitingAdapter();
+    public static WaitingAdapter adapter = new WaitingAdapter();
+    public static ArrayList<Integer> resIdList = new ArrayList<>();
+    private final String ownerId = MainActivity.ownerId;
+    public ArrayList<WaitingData> items = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.waiting_fragment, container, false);
-
-        adapter.setItems(new WaitingSample().getItems());
-
+        //adapter.setItems(new WaitingSample().getItems());
         RecyclerView recyclerView = view.findViewById(R.id.waiting_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
-
+        getResList();
         return view;
+    }
 
+    public void getResList() {
+        String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId=" + ownerId;
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                int resId = jsonObject.getInt("resId");
+                                resIdList.add(resId);
+                            }
+                            getResWaitingList();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        );
+        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
+        AppHelper.requestQueue.add(request);
+    }
+
+    public void getResWaitingList() {
+        items.clear();
+        for (int i = 0; i < resIdList.size(); i++) {
+            int resId = resIdList.get(i);
+            String url = "http://125.132.62.150:8000/letseat/waiting/res/load?resId=" + resId;
+            JsonArrayRequest request = new JsonArrayRequest(
+                    Request.Method.GET,
+                    url,
+                    null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try {
+                                for (int i = 0; i < response.length(); i++) {
+                                    JSONObject jsonObject = response.getJSONObject(i);
+                                    JSONObject userData = jsonObject.getJSONObject("user");
+                                    String email = userData.getString("email");
+                                    String phoneNumber = jsonObject.getString("phoneNumber");
+                                    String peopleNum = jsonObject.getString("peopleNum");
+                                    String date = jsonObject.getString("date");
+                                    String waitingNum = "" + jsonObject.getInt("waitingNumber");
+                                    WaitingData waitingData = new WaitingData(resId, date, waitingNum, email, peopleNum, phoneNumber);
+                                    items.add(waitingData);
+                                }
+                                start();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }
+            );
+            request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보냄
+            AppHelper.requestQueue.add(request);
+        }
+    }
+
+    public void start() {
+        adapter.setItems(items);
+        adapter.notifyDataSetChanged();
     }
 }

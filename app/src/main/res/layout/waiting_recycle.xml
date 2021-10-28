@@ -104,16 +104,6 @@
                     app:backgroundTint="#ED6868"
                     app:cornerRadius="15dp"
                     style="?attr/materialButtonStyle"/>
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="취소"
-                    android:id="@+id/cancelBtn"
-                    android:fontFamily="@font/notosansregular"
-                    android:textColor="#ED6868"
-                    android:layout_weight="1"
-                    app:cornerRadius="15dp"
-                    style="?attr/buttonBarNegativeButtonStyle"/>
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

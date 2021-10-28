@@ -21,10 +21,10 @@ import org.techtown.letseat.waiting.WaitingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String ownerId;
     private MaterialToolbar topMain;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
     private RestaurantFragment RestaurantFragment;
     private OrderFrag orderFrag;
     private WaitingFragment WaitingFragment;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String ownerId = intent.getStringExtra("ownerId");
+        ownerId = intent.getStringExtra("ownerId");
 
         /*Button kakao_logout_button = findViewById(R.id.button);
         kakao_logout_button.setOnClickListener(new View.OnClickListener() {

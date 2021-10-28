@@ -1,24 +1,24 @@
 package org.techtown.letseat.waiting;
 
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+public class WaitingData {
+    int resId;
+    String date, waitingnum, id, people, phonenumber;
 
-import androidx.annotation.NonNull;
-
-import org.techtown.letseat.R;
-
-public class Waiting {
-    String date,waitingnum, id, people, phonenumber;
-    int src;
-
-    public Waiting(String date, String waitingnum, String id, String people, String phonenumber, int src) {
+    public WaitingData(int resId, String date, String waitingnum, String id, String people, String phonenumber) {
+        this.resId = resId;
         this.date = date;
         this.waitingnum = waitingnum;
         this.id = id;
         this.people = people;
         this.phonenumber = phonenumber;
-        this.src = src;
+    }
+
+    public int getResId() {
+        return resId;
+    }
+
+    public void setResId(int resId) {
+        this.resId = resId;
     }
 
     public String getDate() {
@@ -59,13 +59,5 @@ public class Waiting {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
-    }
-
-    public int getSrc() {
-        return src;
-    }
-
-    public void setSrc(int src) {
-        this.src = src;
     }
 }
