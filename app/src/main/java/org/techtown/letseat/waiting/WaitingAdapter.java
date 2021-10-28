@@ -14,12 +14,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.techtown.letseat.R;
 
 import java.util.ArrayList;
 
 public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     private ArrayList<Waiting> items = new ArrayList<>();
     private Context context;
 
@@ -60,6 +64,7 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
 
         TextView dateTv, waitingnumTv, idTv, peopleTv,phoneNumberTv;
         ImageView userImageIv;
+        MaterialButton orderCheckBtn;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +75,14 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
             peopleTv = itemView.findViewById(R.id.peopleTv);
             phoneNumberTv = itemView.findViewById(R.id.phoneNumberTv);
             userImageIv = itemView.findViewById(R.id.userImageIv);
-
+            orderCheckBtn = itemView.findViewById(R.id.orderCheckBtn);
+            DatabaseReference myRef = database.getReference("userId_1");
+            orderCheckBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.setValue(1);
+                }
+            });
         }
     }
 }

@@ -87,8 +87,7 @@ public class RestaurantRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.
-                        setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 "image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
             }

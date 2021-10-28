@@ -2,13 +2,16 @@ package org.techtown.letseat.order;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -29,13 +32,15 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.menu.Menu_add;
 import org.techtown.letseat.util.AppHelper;
 
 import java.util.ArrayList;
 
 public class OrderFrag extends Fragment {
-    int i, q;
+    ProgressBar progressBar;
     private final ArrayList<OrderData> items = new ArrayList<>();
     public static ArrayList<Integer> resIdList = new ArrayList<>();
     public static OrderAdapter adapter;
@@ -50,6 +55,8 @@ public class OrderFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.order_fragment, container, false);
+        progressBar = view.findViewById(R.id.loading);
+        progressBar.setVisibility(View.VISIBLE);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             ownerId = bundle.getString("ownerId");
@@ -69,23 +76,33 @@ public class OrderFrag extends Fragment {
                 // 데이터 값이 변했을 때마다 작동, text 안에 받아온 데이터 문자열을 넣어줌
                 try{
                     num = dataSnapshot.getValue(Integer.class);
+                    Log.d("ds","ds");
                     if(num != 0){
                         //푸쉬알림
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
+                                new Intent(getActivity(),MainActivity.class),0);
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
                         builder.setSmallIcon(R.mipmap.ic_launcher);
                         builder.setContentTitle("주문");
                         builder.setContentText("새로운 주문이 들어왔습니다.");
+                        builder.setContentIntent(contentIntent);
+                        builder.setAutoCancel(true);
                         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
                         }
                         notificationManager.notify(1, builder.build());
-                        i = 1;
-                        q = 1;
+
+                        getWatingOrderList();
+                    }
+                    else {
                         getWatingOrderList();
                     }
                 }catch(Exception e){
                     myRef.setValue(0);
+                    Log.d("ds","ds");
                 }
             }
 
@@ -210,5 +227,6 @@ public class OrderFrag extends Fragment {
     public void start() {
         adapter.setItems(items);
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }
