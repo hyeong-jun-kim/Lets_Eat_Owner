@@ -13,6 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,6 +28,8 @@ import org.techtown.letseat.util.AppHelper;
 import java.util.ArrayList;
 
 public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private ArrayList<Waiting> items = new ArrayList<>();
     private ArrayList<WaitingData> items = new ArrayList<>();
     private Context context;
     @NonNull
@@ -55,6 +61,8 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView dateTv, waitingnumTv, idTv, peopleTv,phoneNumberTv;
         ImageView userImageIv;
+        MaterialButton orderCheckBtn;
+
         Button orderCheckBtn;
         ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +72,14 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
             peopleTv = itemView.findViewById(R.id.peopleTv);
             phoneNumberTv = itemView.findViewById(R.id.phoneNumberTv);
             userImageIv = itemView.findViewById(R.id.userImageIv);
+            orderCheckBtn = itemView.findViewById(R.id.orderCheckBtn);
+            DatabaseReference myRef = database.getReference("userId_1");
+            orderCheckBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myRef.setValue(1);
+                }
+            });
             orderCheckBtn = itemView.findViewById(R.id.orderCheckBtn);
             orderCheckBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
