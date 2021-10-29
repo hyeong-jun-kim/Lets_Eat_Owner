@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,14 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
@@ -29,7 +27,6 @@ import java.util.ArrayList;
 
 public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private ArrayList<Waiting> items = new ArrayList<>();
     private ArrayList<WaitingData> items = new ArrayList<>();
     private Context context;
     @NonNull
@@ -62,8 +59,6 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
         TextView dateTv, waitingnumTv, idTv, peopleTv,phoneNumberTv;
         ImageView userImageIv;
         MaterialButton orderCheckBtn;
-
-        Button orderCheckBtn;
         ViewHolder(View itemView) {
             super(itemView);
             dateTv = itemView.findViewById(R.id.dateTv);
