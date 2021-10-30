@@ -50,7 +50,6 @@ public class WaitingFragment extends Fragment {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     View view;
     int num;
-    private WaitingAdapter adapter = new WaitingAdapter();
     public static WaitingAdapter adapter = new WaitingAdapter();
     public static ArrayList<Integer> resIdList = new ArrayList<>();
     private final String ownerId = MainActivity.ownerId;
@@ -74,6 +73,8 @@ public class WaitingFragment extends Fragment {
                     Log.d("ds","ds");
                     if(num != 0){
                         //푸쉬알림
+                        items.clear();
+                        resIdList = new ArrayList<>();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
@@ -89,10 +90,10 @@ public class WaitingFragment extends Fragment {
                             notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
                         }
                         notificationManager.notify(1, builder.build());
-
+                        getResList();
                     }
                     else {
-
+                        getResList();
                     }
                 }catch(Exception e){
                     myRef.setValue(0);  //ownerId가 처음만들어졌을때
@@ -105,7 +106,6 @@ public class WaitingFragment extends Fragment {
                 // 에러가 날 때 작동
             }
         });
-        getResList();
         return view;
     }
 
@@ -142,7 +142,6 @@ public class WaitingFragment extends Fragment {
     }
 
     public void getResWaitingList() {
-        items.clear();
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             String url = "http://125.132.62.150:8000/letseat/waiting/res/load?resId=" + resId;

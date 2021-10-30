@@ -34,21 +34,20 @@ public class RestaurantFragment extends Fragment {
     ArrayList<Integer> resIdList = new ArrayList<>();
     RestaurantRecycleAdapter adapter = new RestaurantRecycleAdapter();
     int resId;
-    String image;
+    String image,ownerId;
     Bitmap bitmap;
     private View view;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // 레스토랑 목록 불러오기
-        getResData();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.restaurant_fragment, container, false);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            ownerId = bundle.getString("ownerId");
+            Log.d("ds", "ds");
+            getResData();
+        }
         RecyclerView recyclerView = view.findViewById(R.id.store_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
@@ -76,7 +75,7 @@ public class RestaurantFragment extends Fragment {
     }
     // 식당 리스트 가져오기
     void getResData() {
-        String url = "http://125.132.62.150:8000/letseat/store/findAll";
+        String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId="+ownerId;
         JSONArray getData = new JSONArray();
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,

@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private ArrayList<Waiting> items = new ArrayList<>();
     private ArrayList<WaitingData> items = new ArrayList<>();
     private Context context;
     @NonNull
@@ -63,7 +62,6 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
         ImageView userImageIv;
         MaterialButton orderCheckBtn;
 
-        Button orderCheckBtn;
         ViewHolder(View itemView) {
             super(itemView);
             dateTv = itemView.findViewById(R.id.dateTv);

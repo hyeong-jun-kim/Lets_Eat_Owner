@@ -150,7 +150,7 @@ public class OrderFrag extends Fragment {
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             recyclerView.removeAllViewsInLayout();
-            String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
+            String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId="+ownerId;
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,
                     url,
