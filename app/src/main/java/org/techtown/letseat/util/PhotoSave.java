@@ -20,7 +20,7 @@ public class PhotoSave {
 
     public static Bitmap resize(Bitmap bm, Resources res) {
         Configuration config = res.getConfiguration();
-        bm = Bitmap.createScaledBitmap(bm, 500, 500, true);
+        bm = Bitmap.createScaledBitmap(bm, 400, 400, true);
         return bm;
     }
 
@@ -43,7 +43,7 @@ public class PhotoSave {
      * */
     public static String BitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 60, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 30, baos);
         byte[] bytes = baos.toByteArray();
         String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
         return temp;
