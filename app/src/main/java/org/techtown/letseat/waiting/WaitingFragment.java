@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -159,6 +160,7 @@ public class WaitingFragment extends Fragment {
                                 }
                                 start();
                             } catch (JSONException e) {
+                                Toast.makeText(getActivity(),"에러1",Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
                             }
                         }
@@ -166,7 +168,7 @@ public class WaitingFragment extends Fragment {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            Toast.makeText(getActivity(),"에러2",Toast.LENGTH_SHORT).show();
                         }
                     }
             );
@@ -177,6 +179,9 @@ public class WaitingFragment extends Fragment {
 
     public void start() {
         adapter.setItems(items);
+        if(items.size() != 0){
+            //알림보내기
+        }
         adapter.notifyDataSetChanged();
     }
 }

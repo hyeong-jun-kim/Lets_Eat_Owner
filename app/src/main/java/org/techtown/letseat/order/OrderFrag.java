@@ -150,7 +150,7 @@ public class OrderFrag extends Fragment {
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             recyclerView.removeAllViewsInLayout();
-            String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId="+ownerId;
+            String url = "http://125.132.62.150:8000/letseat/order/list/load?resId="+resId;
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,
                     url,
@@ -226,6 +226,9 @@ public class OrderFrag extends Fragment {
     }
     public void start() {
         adapter.setItems(items);
+        if(items.size() != 0){
+            //알림보내기
+        }
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.INVISIBLE);
     }

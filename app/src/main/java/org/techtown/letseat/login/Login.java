@@ -48,7 +48,7 @@ import java.security.MessageDigest;
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button, sub_login_button;
+    private Button  btn_register, login_button;
     private LoginButton kakao_login_button;
     private ImageView fakeKakao;
     private EditText input_email, input_password;
@@ -107,15 +107,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 kakao_login_button.performClick();
-            }
-        });
-
-        sub_login_button = findViewById(R.id.sub_login_button);
-        sub_login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
             }
         });
     }
