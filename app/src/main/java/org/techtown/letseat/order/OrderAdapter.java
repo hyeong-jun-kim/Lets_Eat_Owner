@@ -19,6 +19,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
@@ -27,9 +28,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     String OrderCheck;
-    private ArrayList<OrderData> items;
+    private ArrayList<OrderData> items = new ArrayList<>();
     private Context context;
     private Intent intent;
 
@@ -55,9 +56,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         AppHelper.requestQueue.add(request);
     }
 
-    public OrderAdapter(ArrayList<OrderData> Data) {
-        this.items = Data;
-    }
 
     @NonNull
     @Override

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class RestaurantFragment extends Fragment {
     ArrayList<RestaurantItem> items = new ArrayList<>();
     ArrayList<Integer> resIdList = new ArrayList<>();
-    RestaurantRecycleAdapter adapter = new RestaurantRecycleAdapter();
+    public static RestaurantRecycleAdapter adapter = new RestaurantRecycleAdapter();
     int resId;
     String image,ownerId;
     Bitmap bitmap;

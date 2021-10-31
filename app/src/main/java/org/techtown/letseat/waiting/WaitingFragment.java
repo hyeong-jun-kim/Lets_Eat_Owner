@@ -1,8 +1,10 @@
 package org.techtown.letseat.waiting;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -37,6 +39,7 @@ import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class WaitingFragment extends Fragment {
@@ -65,30 +68,9 @@ public class WaitingFragment extends Fragment {
                 try{
                     num = dataSnapshot.getValue(Integer.class);
                     Log.d("ds","ds");
-                    if(num != 0){
-                        //푸쉬알림
                         items.clear();
                         resIdList = new ArrayList<>();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
-                                new Intent(getActivity(),MainActivity.class),0);
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
-                        builder.setSmallIcon(R.mipmap.ic_launcher);
-                        builder.setContentTitle("대기자");
-                        builder.setContentText("새로운 대기자가 생겼습니다.");
-                        builder.setContentIntent(contentIntent);
-                        builder.setAutoCancel(true);
-                        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
-                        }
-                        notificationManager.notify(1, builder.build());
-                        getResList();
-                    }
-                    else {
-                        getResList();
-                    }
+                    getResList();
                 }catch(Exception e){
                     myRef.setValue(0);  //ownerId가 처음만들어졌을때
                     Log.d("ds","ds");
@@ -105,6 +87,7 @@ public class WaitingFragment extends Fragment {
 
     public void getResList() {
         String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId=" + ownerId;
+        Log.d("ds","ds");
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -127,7 +110,7 @@ public class WaitingFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.d("에러","에러");
                     }
                 }
         );
@@ -181,6 +164,19 @@ public class WaitingFragment extends Fragment {
         adapter.setItems(items);
         if(items.size() != 0){
             //알림보내기
+            PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
+                    new Intent(getActivity(),MainActivity.class),0);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
+            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setContentTitle("대기자");
+            builder.setContentText("새로운 대기자가 생겼습니다.");
+            builder.setContentIntent(contentIntent);
+            builder.setAutoCancel(true);
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+            }
+            notificationManager.notify(1, builder.build());
         }
         adapter.notifyDataSetChanged();
     }

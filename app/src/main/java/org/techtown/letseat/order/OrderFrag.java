@@ -35,6 +35,7 @@ import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
+import org.techtown.letseat.waiting.WaitingAdapter;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,7 @@ public class OrderFrag extends Fragment {
     ProgressBar progressBar;
     private final ArrayList<OrderData> items = new ArrayList<>();
     public static ArrayList<Integer> resIdList = new ArrayList<>();
-    public static OrderAdapter adapter;
+    public static OrderAdapter adapter = new OrderAdapter();
     private String ownerId;
     private int num;
     private RecyclerView recyclerView;
@@ -65,40 +66,18 @@ public class OrderFrag extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new OrderAdapter(items);
         recyclerView.setAdapter(adapter);
-        getRestaurantList();
-        DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
+        DatabaseReference myRef = database.getReference("ownerId_1");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 데이터 값이 변했을 때마다 작동, text 안에 받아온 데이터 문자열을 넣어줌
                 try{
                     num = dataSnapshot.getValue(Integer.class);
+                    items.clear();
+                    resIdList = new ArrayList<>();
+                    getRestaurantList();
                     Log.d("ds","ds");
-                    if(num != 0){
-                        //푸쉬알림
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
-                                new Intent(getActivity(),MainActivity.class),0);
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
-                        builder.setSmallIcon(R.mipmap.ic_launcher);
-                        builder.setContentTitle("주문");
-                        builder.setContentText("새로운 주문이 들어왔습니다.");
-                        builder.setContentIntent(contentIntent);
-                        builder.setAutoCancel(true);
-                        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
-                        }
-                        notificationManager.notify(1, builder.build());
-
-                        getWatingOrderList();
-                    }
-                    else {
-                        getWatingOrderList();
-                    }
                 }catch(Exception e){
                     myRef.setValue(0);
                     Log.d("ds","ds");
@@ -115,6 +94,7 @@ public class OrderFrag extends Fragment {
     // Owner Id로 레스토랑 리스트 받기
     void getRestaurantList() {
         String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId=" + ownerId;
+        Log.d("ds","ds");
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -137,7 +117,8 @@ public class OrderFrag extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.d("에러","에러");
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 }
         );
@@ -158,9 +139,6 @@ public class OrderFrag extends Fragment {
                         @Override
                         public void onResponse(JSONArray response) {
                             int size = items.size();
-                            items.clear();
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyItemRangeRemoved(0, size);
                             try {
                                 for (int i = 0; i < response.length(); i++) {
                                     String menus = "";
@@ -205,11 +183,12 @@ public class OrderFrag extends Fragment {
                                         Log.d("응답", response.toString());
                                     }
                                 }
+                                start();
                             } catch (JSONException e) {
                                 Log.d("예외", e.toString());
                                 e.printStackTrace();
                             }
-                            start();
+
                         }
                     },
                     new Response.ErrorListener() {
@@ -225,6 +204,21 @@ public class OrderFrag extends Fragment {
     }
     public void start() {
         adapter.setItems(items);
+        if(items.size() != 0){
+            PendingIntent contentIntent = PendingIntent.getActivity(getActivity(),0,
+                    new Intent(getActivity(),MainActivity.class),0);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "default");
+            builder.setSmallIcon(R.mipmap.ic_launcher);
+            builder.setContentTitle("주문");
+            builder.setContentText("새로운 주문이 들어왔습니다.");
+            builder.setContentIntent(contentIntent);
+            builder.setAutoCancel(true);
+            NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager.createNotificationChannel(new NotificationChannel("default", "기본 채널", NotificationManager.IMPORTANCE_DEFAULT));
+            }
+            notificationManager.notify(1, builder.build());
+        }
         adapter.notifyDataSetChanged();
         progressBar.setVisibility(View.INVISIBLE);
     }
