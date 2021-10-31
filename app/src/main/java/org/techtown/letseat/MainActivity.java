@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("ownerId",ownerId);
         orderFrag.setArguments(bundle);
+        RestaurantFragment.setArguments(bundle);
         Log.d("ds","ds");
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), 0);
