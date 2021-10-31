@@ -34,7 +34,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
-import org.techtown.letseat.menu.Menu_add;
 import org.techtown.letseat.util.AppHelper;
 
 import java.util.ArrayList;
@@ -150,7 +149,7 @@ public class OrderFrag extends Fragment {
         for (int i = 0; i < resIdList.size(); i++) {
             int resId = resIdList.get(i);
             recyclerView.removeAllViewsInLayout();
-            String url = "http://125.132.62.150:8000/letseat/store/findOwner?ownerId="+ownerId;
+            String url = "http://125.132.62.150:8000/letseat/order/list/restaurant?resId=" + resId;
             JsonArrayRequest request = new JsonArrayRequest(
                     Request.Method.GET,
                     url,
