@@ -34,8 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
+import org.techtown.letseat.login.Login;
 import org.techtown.letseat.util.AppHelper;
-import org.techtown.letseat.waiting.WaitingAdapter;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class OrderFrag extends Fragment {
     private final ArrayList<OrderData> items = new ArrayList<>();
     public static ArrayList<Integer> resIdList = new ArrayList<>();
     public static OrderAdapter adapter = new OrderAdapter();
-    private String ownerId;
+    private String ownerId = Login.ownerId;
     private int num;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -54,14 +54,11 @@ public class OrderFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ownerId = Login.ownerId;
         View view = inflater.inflate(R.layout.order_fragment, container, false);
         progressBar = view.findViewById(R.id.loading);
         progressBar.setVisibility(View.VISIBLE);
         Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            ownerId = bundle.getString("ownerId");
-            Log.d("ds", "ds");
-        }
         recyclerView = view.findViewById(R.id.add_menu_recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
