@@ -44,6 +44,7 @@ import java.util.List;
 
 public class WaitingFragment extends Fragment {
 
+    public static int userId;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     View view;
     int num;
@@ -60,7 +61,7 @@ public class WaitingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);
 
-        DatabaseReference myRef = database.getReference("waiting_ownerId_1");
+        DatabaseReference myRef = database.getReference("waiting_ownerId_"+ownerId);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -134,11 +135,12 @@ public class WaitingFragment extends Fragment {
                                     JSONObject jsonObject = response.getJSONObject(i);
                                     JSONObject userData = jsonObject.getJSONObject("user");
                                     String email = userData.getString("email");
+                                    userId = userData.getInt("userId");
                                     String phoneNumber = jsonObject.getString("phoneNumber");
                                     String peopleNum = jsonObject.getString("peopleNum");
                                     String date = jsonObject.getString("date");
                                     String waitingNum = "" + jsonObject.getInt("waitingNumber");
-                                    WaitingData waitingData = new WaitingData(resId, date, waitingNum, email, peopleNum, phoneNumber);
+                                    WaitingData waitingData = new WaitingData(resId, date, waitingNum, email, peopleNum, phoneNumber,userId);
                                     items.add(waitingData);
                                 }
                                 start();

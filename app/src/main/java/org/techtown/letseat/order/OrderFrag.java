@@ -67,7 +67,7 @@ public class OrderFrag extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        DatabaseReference myRef = database.getReference("ownerId_1");
+        DatabaseReference myRef = database.getReference("ownerId_"+ownerId);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

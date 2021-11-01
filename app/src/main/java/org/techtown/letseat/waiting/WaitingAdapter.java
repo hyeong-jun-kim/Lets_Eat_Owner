@@ -26,6 +26,7 @@ import org.techtown.letseat.util.AppHelper;
 import java.util.ArrayList;
 
 public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHolder> {
+    int userId = WaitingFragment.userId;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private ArrayList<WaitingData> items = new ArrayList<>();
     private Context context;
@@ -68,13 +69,6 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
             phoneNumberTv = itemView.findViewById(R.id.phoneNumberTv);
             userImageIv = itemView.findViewById(R.id.userImageIv);
             orderCheckBtn = itemView.findViewById(R.id.orderCheckBtn);
-            DatabaseReference myRef = database.getReference("userId_1");
-            orderCheckBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myRef.setValue(1);
-                }
-            });
             orderCheckBtn = itemView.findViewById(R.id.orderCheckBtn);
             orderCheckBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +78,7 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
                         Toast.makeText(context, "앞의 웨이팅을 먼저 처리해야합니다.", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    userId = items.get(pos).userId;
                     processWaiting(items.get(pos).resId);
                     WaitingFragment.adapter.notifyItemRemoved(pos);
                     items.remove(pos);
@@ -109,6 +104,8 @@ public class WaitingAdapter extends RecyclerView.Adapter<WaitingAdapter.ViewHold
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            DatabaseReference myRef = database.getReference("userId_"+userId);
+                            myRef.setValue(1);
                             Toast.makeText(context, "웨이팅 처리가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                         }
                     },
