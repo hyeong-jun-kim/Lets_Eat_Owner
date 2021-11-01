@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +22,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 import org.techtown.letseat.util.PhotoSave;
@@ -34,20 +34,18 @@ public class RestaurantFragment extends Fragment {
     ArrayList<Integer> resIdList = new ArrayList<>();
     public static RestaurantRecycleAdapter adapter = new RestaurantRecycleAdapter();
     int resId;
-    String image,ownerId;
+    String image;
+    String ownerId = MainActivity.ownerId;
     Bitmap bitmap;
     private View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ownerId = MainActivity.ownerId;
         View view = inflater.inflate(R.layout.restaurant_fragment, container, false);
         Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            ownerId = bundle.getString("ownerId");
-            Log.d("ds", "ds");
-            getResData();
-        }
+        getResData();
         RecyclerView recyclerView = view.findViewById(R.id.store_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerView.setAdapter(adapter);

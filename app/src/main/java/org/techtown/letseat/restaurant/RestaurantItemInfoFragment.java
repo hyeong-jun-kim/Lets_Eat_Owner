@@ -28,9 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +44,8 @@ public class RestaurantItemInfoFragment extends Fragment {
     private final int GET_GALLERY_IMAGE = 200;
     private final String[] items = {"한식", "중식", "일식", "양식"};
     private String name, phoneNumber, openTime, resIntro, businessNumber, resType, location, image;
-    private String email, ownerId;
+    private String email;
+    private String ownerId = MainActivity.ownerId;
     private int aloneAble;
     private TextView textView;
     private EditText nameEdit, phoneNumEdit, openTimeEdit, introEdit, businessEdit, locationEdit;
@@ -60,6 +59,7 @@ public class RestaurantItemInfoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ownerId = MainActivity.ownerId;
         resId = RestaurantItemMain.getResId();
     }
     @Override
@@ -68,7 +68,6 @@ public class RestaurantItemInfoFragment extends Fragment {
         // OwnerId 가져오기
         SharedPreferences preferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
         String email_string = preferences.getString("email", "");
-        getOwnerId(email_string);
         // 초기 설정
         View view = inflater.inflate(R.layout.restaurant_item_info_fragment, container, false);
         singleMealYes = view.findViewById(R.id.info_singlemeal_yes);
@@ -252,32 +251,6 @@ public class RestaurantItemInfoFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.d("error", error.toString());
                         Toast.makeText(getActivity(), "연결상태 불량", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        request.setShouldCache(false); // 이전 결과 있어도 새로 요청해 응답을 보내줌
-        AppHelper.requestQueue = Volley.newRequestQueue(getActivity()); // requsetQueue 초기화
-        AppHelper.requestQueue.add(request);
-    }
-
-    /**
-     * Get요청으로 OwnerId 가져오기
-     */
-    public void getOwnerId(String email_string) {
-        String url = "http://125.132.62.150:8000/letseat/register/owner/get/id?email=" + email_string;
-        StringRequest request = new StringRequest(
-                Request.Method.GET,
-                url,
-                new Response.Listener<String>() {
-                    @Override // 응답 잘 받았을 때
-                    public void onResponse(String response) {
-                        ownerId = response;
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override // 에러 발생 시
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("error", error.toString());
                     }
                 }
         );

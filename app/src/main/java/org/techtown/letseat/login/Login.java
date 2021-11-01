@@ -41,19 +41,19 @@ import org.techtown.letseat.MainActivity;
 import org.techtown.letseat.R;
 import org.techtown.letseat.util.AppHelper;
 
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 
 
 
 public class Login extends AppCompatActivity {
-    private Button  btn_register, login_button;
+    public static String ownerId;
+    private Button btn_register, login_button;
     private LoginButton kakao_login_button;
     private ImageView fakeKakao;
     private EditText input_email, input_password;
     private String email_string, pwd_string;
-    private String ownerId, kakao_email_string;
+    private String kakao_email_string;
     private KaKaoCallBack kaKaoCallBack;
 
     @Override
@@ -158,9 +158,8 @@ public class Login extends AppCompatActivity {
                 new Response.Listener<String>(){
                     @Override
                     public void onResponse(String response) {
-                        String ownerId = response;
+                        ownerId = response;
                         Intent intent = new Intent(Login.this, MainActivity.class);
-                        intent.putExtra("ownerId",ownerId);
                         startActivity(intent);
                         finish();
                     }
@@ -267,7 +266,7 @@ public class Login extends AppCompatActivity {
                     }
 
                     else{
-                        kakao_email_string = result.getKakaoAccount().getEmail().toString();
+                        kakao_email_string = result.getKakaoAccount().getEmail();
                         sendLoginCheckRequest();
                     }
                 }

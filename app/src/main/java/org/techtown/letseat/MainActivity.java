@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 
+import org.techtown.letseat.login.Login;
 import org.techtown.letseat.order.OrderFrag;
 import org.techtown.letseat.restaurant.RestaurantFragment;
 import org.techtown.letseat.util.ViewPagerAdapter;
@@ -22,7 +23,7 @@ import org.techtown.letseat.waiting.WaitingFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String ownerId;
+    public static String ownerId = Login.ownerId;
     private MaterialToolbar topMain;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ownerId = Login.ownerId;
         setContentView(R.layout.activity_main);
 
         MaterialToolbar toolbar = findViewById(R.id.topMain);
@@ -46,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(homeIntent);
             }
         });
-
-
-        Intent intent = getIntent();
-        ownerId = intent.getStringExtra("ownerId");
-
         /*Button kakao_logout_button = findViewById(R.id.button);
         kakao_logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         WaitingFragment = new WaitingFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString("ownerId",ownerId);
         orderFrag.setArguments(bundle);
         RestaurantFragment.setArguments(bundle);
         Log.d("ds","ds");
